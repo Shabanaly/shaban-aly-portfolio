@@ -1,0 +1,3 @@
+/assets/*
+  Cache-Control: no-transform
+  Nelson-Edge-Cache-Control: no-transform
