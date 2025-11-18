@@ -1,0 +1,83 @@
+functionsDirectory = "/home/shaban/Desktop/mywebsite/netlify/functions"
+functionsDirectoryOrigin = "config-v1"
+plugins = []
+
+[build]
+publish = "/home/shaban/Desktop/mywebsite"
+publishOrigin = "config"
+commandOrigin = "config"
+command = "echo 'Static site - no build step needed'"
+functions = "/home/shaban/Desktop/mywebsite/netlify/functions"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[dev]
+command = "npm start || python3 -m http.server 8000"
+targetPort = 8000.0
+framework = "#static"
+
+[functions]
+
+[functions."*"]
+
+[[headers]]
+for = "/*.js"
+
+[headers.values]
+Content-Type = "application/octet-stream"
+
+[[headers]]
+for = "/*.css"
+
+[headers.values]
+Content-Type = "application/octet-stream"
+
+[[headers]]
+for = "/admin/*"
+
+[headers.values]
+Access-Control-Allow-Origin = "*"
+
+[[headers]]
+for = "/.netlify/functions/*"
+
+[headers.values]
+Access-Control-Allow-Origin = "*"
+Access-Control-Allow-Methods = "GET, POST, DELETE, OPTIONS"
+Access-Control-Allow-Headers = "Content-Type"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/admin/*"
+to = "/admin/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
