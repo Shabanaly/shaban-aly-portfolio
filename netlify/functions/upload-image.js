@@ -129,7 +129,8 @@ function uploadToCloudinary(buffer, filename) {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       {
-        resource_type: 'auto',
+        resource_type: 'image',
+        type: 'upload',
         public_id: `portfolio/${Date.now()}`,
       },
       (error, result) => {
