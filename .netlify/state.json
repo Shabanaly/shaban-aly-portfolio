@@ -1,3 +1,20 @@
 {
-	"siteId": "cf7460fc-3b14-414c-a67d-949a014a1a9f"
+	"siteId": "5c9fae16-c2c4-4ab8-9a8a-2629be2c3ab1",
+	"geolocation": {
+		"data": {
+			"city": "Suez",
+			"country": {
+				"code": "EG",
+				"name": "Egypt"
+			},
+			"subdivision": {
+				"code": "SUZ",
+				"name": "Suez"
+			},
+			"timezone": "Africa/Cairo",
+			"latitude": 29.9708,
+			"longitude": 32.5346
+		},
+		"timestamp": 1763477098378
+	}
 }
