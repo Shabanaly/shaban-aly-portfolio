@@ -1,0 +1,8 @@
+node_modules/
+.netlify/
+.env
+.env.local
+.env.*.local
+my_data_secret.txt
+*.log
+.DS_Store
