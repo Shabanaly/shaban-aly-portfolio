@@ -431,6 +431,13 @@
       </div>
     </div>
   </div>
+  <script>
+  window.logout = function () {
+    localStorage.removeItem('admin_token');
+    window.location.href = '/index.html';
+  }
+</script>
+
 
   <script type="module">
     import { ADMIN_CONFIG, API_ENDPOINTS } from './config.js';
@@ -457,7 +464,7 @@
       }
     });
 
-   window.logout = function() {
+    function logout () {
       localStorage.removeItem('admin_token');
       window.location.href = '/index.html';
       document.getElementById('password').value = '';
