@@ -104,7 +104,7 @@ body {
     box-shadow: 0 8px 20px rgba(2, 6, 23, 0.5);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
     .avatar-section .avatar {
         position: static;
         transform: none;
@@ -293,7 +293,7 @@ body {
 }
 
 /* small screens: tighter */
-@media(max-width:800px) {
+@media(max-width:600px) {
     .terminal {
         font-size: 0.9rem;
         padding: .75rem
@@ -515,7 +515,7 @@ textarea {
     color: var(--muted)
 }
 
-@media(max-width:800px) {
+@media(max-width:600px) {
     .hero-inner {
         flex-direction: column
     }
