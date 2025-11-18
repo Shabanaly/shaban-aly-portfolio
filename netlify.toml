@@ -2,7 +2,7 @@
   # Build command (if using static files, no build needed)
   command = "echo 'Static site - no build step needed'"
   # Directory to publish
-  publish = "mywebsite"
+  publish = "/"
   # Functions directory
   functions = "netlify/functions"
 
