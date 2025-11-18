@@ -26,6 +26,16 @@
       <div class="container">
         <img class="avatar" alt="صورة Shaban Aly" src="assets/my_image.jpg" onerror="this.style.display='none'" />
       </div>
+      <h3>تواصل معي</h3>
+       <div class="hero-card">
+          <ul class="social-list">
+            <li><a href="https://github.com/Shabanaly"><img alt="GitHub" src="assets/github.png"/></a></li>
+            <li><a href="https://www.linkedin.com/in/shaban-ali-03982a329/"><img alt="LinkedIn" src="assets/linkedin.png"/></a></li>
+            <li><a href="#"><img alt="Facebook" src="assets/facebook.png"/></a></li>
+            <li><a href="sa676185@gmail"><img alt="Gmail" src="assets/gmail.png"/></a></li>
+            <li><a href="https://wa.me/201017215425?text=مرحبا%20أريد%20التواصل"><img alt="Whatsapp" src="assets/whatsapp.png"/></a></li>
+          </ul>
+        </div>
     </section>
   <main>
     <section class="hero">
@@ -40,28 +50,14 @@
             <a class="btn btn-outline" href="contact.html">تواصل معي</a>
           </p>
         </div>
-        <div class="hero-card">
-          <ul class="social-list">
-            <li><a href="#"><img alt="GitHub" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"/></a></li>
-            <li><a href="#"><img alt="LinkedIn" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg"/></a></li>
-            <li><a href="#"><img alt="Linux" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linux.svg"/></a></li>
-            <li><a href="projects.html"><img alt="Kali" src="assets/kali-placeholder.svg"/></a></li>
-          </ul>
-        </div>
+       
       </div>
     </section>
 
-    
-
-    <section id="about" class="container about">
-      <h3>عنّي</h3>
-      <p>اسمي Shaban Aly وأتعلم حاليًا الأمن السيبراني. أحب التجربة العمليّة على أنظمة لينوكس الخاصة بالاختبار (Kali) وأتعلم أدوات مثل Nmap, Wireshark, Metasploit وعمليات تحليل الشبكات.</p>
-    </section>
-    
       <!-- Kali-like terminal simulation -->
       <section class="terminal-section">
         <div class="container">
-          <h3> تيرمنال Kali</h3>
+       
           <div class="terminal" id="kali-terminal" role="region" aria-label="محاكاة تيرمنال كالي">
             <div class="terminal-controls">
               <button id="terminal-copy" class="small-btn">نسخ آخر أمر</button>
@@ -73,6 +69,13 @@
         </div>
       </section>
 
+
+    <section id="about" class="container about">
+      <h3>عنّي</h3>
+      <p>اسمي Shaban Aly وأتعلم حاليًا الأمن السيبراني. أحب التجربة العمليّة على أنظمة لينوكس الخاصة بالاختبار (Kali) وأتعلم أدوات مثل Nmap, Wireshark, Metasploit وعمليات تحليل الشبكات.</p>
+    </section>
+    
+    
     <section id="works" class="container works">
       <h3>الأعمال/المشاريع</h3>
       <div id="projects-list" class="grid">
@@ -91,12 +94,12 @@
         <li><img alt="Metasploit" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/metasploit.svg"/><span>Metasploit</span></li>
         <li><img alt="Docker" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/docker.svg"/><span>Docker</span></li>
       </ul>
-      <p class="note">اقتراحات أيقونات إضافية مفيدة: GitHub, VSCode, OpenVPN, Burp Suite, Hashcat</p>
+      <p class="note">GitHub, VSCode, OpenVPN, Burp Suite, Hashcat</p>
     </section>
 
     <section id="contact" class="container contact">
       <h3>تواصل</h3>
-      <p>تقدر ترسل رسالة سريعة هنا — سأستلمها عبر Formspree (مثال جاهز). بدّل `YOUR_FORMSPREE_ENDPOINT` بالـ endpoint الخاص بك.</p>
+      <p>تقدر ترسل رسالة سريعة هنا — سأستلمها عبر </p>
       <form id="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT" method="POST">
         <label>الاسم<input type="text" name="name" required></label>
         <label>البريد الإلكتروني<input type="email" name="email" required></label>
@@ -139,7 +142,7 @@
               <img src="${project.image}" alt="${project.title}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 1rem;" onerror="this.style.display='none'">
               <h4>${project.title}</h4>
               <p>${project.description}</p>
-              ${project.link ? `<a class="link" href="${project.link}" target="_blank">🔗 فتح الرابط</a>` : '<span class="link" style="opacity: 0.5;">لا يوجد رابط</span>'}
+              ${project.link ? `<a class="link" href="${project.link}" target="_blank">Open Link 🔗</a>` : '<span class="link" style="opacity: 0.5;">لا يوجد رابط</span>'}
             </article>
           `).join('');
         } else {
