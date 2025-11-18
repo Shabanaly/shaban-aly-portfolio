@@ -153,4 +153,4 @@ MIT — Free to use and modify!
 
 **Built with ❤️ for Shaban Aly**
 
-Full-Stack Cybersecurity Portfolio | November 2025
+Cybersecurity Portfolio | November 2025
