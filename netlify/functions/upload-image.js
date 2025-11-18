@@ -8,58 +8,65 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Database setup
+// DB setup
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
 });
 
-// ------------------------------
-// Multipart Form Parser (بدون مكتبات)
-// ------------------------------
+// MULTIPART PARSER — FULL BINARY SAFE
 function parseMultipartForm(event) {
   const contentType =
     event.headers["content-type"] || event.headers["Content-Type"];
 
   if (!contentType || !contentType.includes("multipart/form-data")) {
-    throw new Error("Invalid Content-Type, expected multipart/form-data");
+    throw new Error("Invalid multipart form-data");
   }
 
-  const boundary = "--" + contentType.split("boundary=")[1];
-  const body = Buffer.from(
-    event.body,
-    event.isBase64Encoded ? "base64" : "binary"
+  const boundaryKey = "boundary=";
+  const boundary = "--" + contentType.substring(
+    contentType.indexOf(boundaryKey) + boundaryKey.length
   );
 
-  const parts = body.split(Buffer.from(boundary));
+  // Convert Netlify body to binary buffer
+  const bodyBuffer = Buffer.from(
+    event.body,
+    event.isBase64Encoded ? "base64" : "utf8"
+  );
 
-  for (let part of parts) {
-    if (part.includes("filename=")) {
-      const start = part.indexOf("\r\n\r\n") + 4;
-      const end = part.lastIndexOf("\r\n");
+  const parts = [];
+  let start = bodyBuffer.indexOf(boundary);
 
-      const fileBuffer = part.slice(start, end);
+  while (start !== -1) {
+    const end = bodyBuffer.indexOf(boundary, start + boundary.length);
+    if (end === -1) break;
 
-      const filenameMatch =
-        part.toString().match(/filename="([^"]+)"/) ||
-        part.toString().match(/filename=(.+)/);
-      const filename = filenameMatch
-        ? filenameMatch[1].replace(/"/g, "")
-        : `image-${Date.now()}.jpg`;
+    const part = bodyBuffer.slice(start + boundary.length, end);
+    parts.push(part);
+    start = end;
+  }
 
-      return { fileBuffer, filename };
+  for (const part of parts) {
+    const headerEnd = part.indexOf("\r\n\r\n");
+    if (headerEnd === -1) continue;
+
+    const header = part.slice(0, headerEnd).toString();
+    const content = part.slice(headerEnd + 4).slice(0, -2); // remove ending CRLF
+
+    if (header.includes("filename=")) {
+      const match = header.match(/filename="([^"]+)"/);
+      const filename = match ? match[1] : `image-${Date.now()}`;
+      return { fileBuffer: content, filename };
     }
   }
 
   return { fileBuffer: null, filename: null };
 }
 
-// ------------------------------
 // Upload to Cloudinary
-// ------------------------------
 function uploadToCloudinary(buffer, filename) {
   return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
+    const upload = cloudinary.uploader.upload_stream(
       {
         resource_type: "image",
         type: "upload",
@@ -67,20 +74,17 @@ function uploadToCloudinary(buffer, filename) {
         public_id: `${Date.now()}`,
       },
       (err, result) => {
-        if (err) return reject(err);
-        resolve(result);
+        if (err) reject(err);
+        else resolve(result);
       }
     );
 
-    uploadStream.end(buffer);
+    upload.end(buffer);
   });
 }
 
-// ------------------------------
-// Main Handler
-// ------------------------------
 export async function handler(event) {
-  // Handle CORS
+  // CORS
   if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 200,
@@ -93,24 +97,18 @@ export async function handler(event) {
   }
 
   if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: "Method Not Allowed" }),
-    };
+    return { statusCode: 405, body: "Method Not Allowed" };
   }
 
   try {
-    // Parse image from request
     const { fileBuffer, filename } = parseMultipartForm(event);
 
-    if (!fileBuffer || fileBuffer.length === 0) {
-      throw new Error("Invalid image file");
+    if (!fileBuffer) {
+      throw new Error("No image file detected");
     }
 
-    // Upload to Cloudinary
     const uploadResult = await uploadToCloudinary(fileBuffer, filename);
 
-    // Save to database
     const client = await pool.connect();
     await client.query(
       "INSERT INTO images (url, filename, created_at) VALUES ($1, $2, NOW())",
@@ -126,15 +124,12 @@ export async function handler(event) {
         url: uploadResult.secure_url,
       }),
     };
-  } catch (err) {
-    console.error("Upload error:", err);
+  } catch (error) {
+    console.error("Upload error:", error);
     return {
       statusCode: 500,
       headers: { "Access-Control-Allow-Origin": "*" },
-      body: JSON.stringify({
-        success: false,
-        error: err.message,
-      }),
+      body: JSON.stringify({ success: false, error: error.message }),
     };
   }
 }
