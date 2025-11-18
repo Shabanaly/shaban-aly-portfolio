@@ -131,7 +131,7 @@ function uploadToCloudinary(buffer, filename) {
       {
         resource_type: 'image',
         type: 'upload',
-        folder: 'portfolio',
+        folder: 'projects',
         public_id: `projects/${Date.now()}`,
       },
       (error, result) => {
