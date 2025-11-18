@@ -1,9 +1,9 @@
 // animations.js — initialize tsparticles and GSAP per-page (no manual toggle)
-(function(){
+(function () {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // helper to detect page
-  function pageName(){
+  function pageName() {
     const p = window.location.pathname.split('/').pop();
     return p || 'index.html';
   }
@@ -27,43 +27,43 @@
 
   let tsInstance = null;
 
-  function initParticlesForPage(){
-    if(prefersReduced) return; // respect reduced motion
+  function initParticlesForPage() {
+    if (prefersReduced) return; // respect reduced motion
     const p = pageName();
     const cfg = configs[p] || configs['index.html'];
     const el = document.getElementById('tsparticles');
-    if(!el) return;
-    if(!cfg){
+    if (!el) return;
+    if (!cfg) {
       // ensure particles are removed if page opted out
-      if(tsInstance && tsInstance.destroy) tsInstance.destroy();
+      if (tsInstance && tsInstance.destroy) tsInstance.destroy();
       el.innerHTML = '';
       return;
     }
     // destroy previous if exists
-    if(tsInstance && tsInstance.destroy) tsInstance.destroy();
+    if (tsInstance && tsInstance.destroy) tsInstance.destroy();
     const options = Object.assign({ interactivity: { events: { onHover: { enable: true, mode: 'repulse' } } } }, cfg);
-    tsParticles.load({ id: el.id, options }).then(instance => { tsInstance = instance; }).catch(()=>{});
+    tsParticles.load({ id: el.id, options }).then(instance => { tsInstance = instance; }).catch(() => { });
   }
 
-  function initGSAP(){
-    try{
+  function initGSAP() {
+    try {
       // general entry animations
-      gsap.from('.hero-text', {opacity:0, y:16, duration:0.85, ease:'power2.out'});
-      gsap.from('.hero-card', {opacity:0, x:32, duration:0.85, delay:0.12, ease:'power2.out'});
-      gsap.from('.card', {opacity:0, y:10, duration:0.7, stagger:0.06, ease:'power2.out'});
+      gsap.from('.hero-text', { opacity: 0, y: 16, duration: 0.85, ease: 'power2.out' });
+      gsap.from('.hero-card', { opacity: 0, x: 32, duration: 0.85, delay: 0.12, ease: 'power2.out' });
+      gsap.from('.card', { opacity: 0, y: 10, duration: 0.7, stagger: 0.06, ease: 'power2.out' });
       // page-specific tweaks
       const p = pageName();
-      if(p === 'projects.html'){
-        gsap.from('.works .card', {scale:0.98, duration:0.8, stagger:0.06, opacity:0});
+      if (p === 'projects.html') {
+        gsap.from('.works .card', { scale: 0.98, duration: 0.8, stagger: 0.06, opacity: 0 });
       }
-    }catch(e){/*gsap not available*/}
+    } catch (e) {/*gsap not available*/ }
   }
 
-  window.addEventListener('load', ()=>{
+  window.addEventListener('load', () => {
     initParticlesForPage();
-    if(!prefersReduced) initGSAP();
+    if (!prefersReduced) initGSAP();
     // respond to system preference changes
-    window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', ()=>{ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ if(tsInstance && tsInstance.destroy) tsInstance.destroy(); document.documentElement.classList.add('reduced-motion'); } else { document.documentElement.classList.remove('reduced-motion'); initParticlesForPage(); initGSAP(); } });
+    window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', () => { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { if (tsInstance && tsInstance.destroy) tsInstance.destroy(); document.documentElement.classList.add('reduced-motion'); } else { document.documentElement.classList.remove('reduced-motion'); initParticlesForPage(); initGSAP(); } });
   });
 
 })();
