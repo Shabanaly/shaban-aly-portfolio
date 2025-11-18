@@ -457,7 +457,7 @@
       }
     });
 
-    function logout() {
+   window.logout = function() {
       localStorage.removeItem('admin_token');
       window.location.href = '/index.html';
       document.getElementById('password').value = '';
