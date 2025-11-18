@@ -1,0 +1,24 @@
+{
+  "name": "shaban-aly-portfolio",
+  "version": "2.0.0",
+  "description": "Full-stack cybersecurity portfolio with admin dashboard",
+  "main": "index.js",
+  "scripts": {
+    "dev": "netlify dev",
+    "start": "python3 -m http.server 8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["portfolio", "netlify", "cloudinary", "postgres"],
+  "author": "Shaban Aly",
+  "license": "MIT",
+  "dependencies": {
+    "cloudinary": "^1.40.0",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.20.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

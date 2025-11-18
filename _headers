@@ -1,0 +1,15 @@
+/* Prevent direct access to source files */
+/*.js
+  Content-Type: application/octet-stream
+
+/*.css
+  Content-Type: application/octet-stream
+
+/* Allow CORS for API calls */
+/admin/*
+  Access-Control-Allow-Origin: *
+
+/.netlify/functions/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS
+  Access-Control-Allow-Headers: Content-Type

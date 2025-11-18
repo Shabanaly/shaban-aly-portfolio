@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تواصل — Shaban Aly</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo">Shaban Aly</h1>
+      <nav class="nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="about.html">عني</a>
+        <a href="projects.html">الأعمال</a>
+        <a href="skills.html">المهارات</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div id="tsparticles" aria-hidden="true"></div>
+    <section class="container contact">
+      <h2>تواصل معي</h2>
+      <p>استخدم النموذج أدناه أو راسلني عبر البريد الإلكتروني.</p>
+      <form id="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT" method="POST">
+        <label>الاسم<input type="text" name="name" required></label>
+        <label>البريد الإلكتروني<input type="email" name="email" required></label>
+        <label>الرسالة<textarea name="message" rows="6" required></textarea></label>
+        <button type="submit" class="btn">أرسل</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Shaban Aly</p>
+    </div>
+  </footer>
+
+  <script src="animations.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

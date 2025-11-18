@@ -1,0 +1,25 @@
+[build]
+  # Build command (if using static files, no build needed)
+  command = "echo 'Static site - no build step needed'"
+  # Directory to publish
+  publish = "/"
+  # Functions directory
+  functions = "netlify/functions"
+
+[dev]
+  # Local development settings
+  command = "npm start || python3 -m http.server 8000"
+  targetPort = 8000
+  framework = "#static"
+
+# Enable scheduled functions if needed in the future
+# [[scheduled_functions]]
+#   function = "function-name"
+#   expression = "0 0 * * *"
+
+# Environment variables to set in Netlify UI:
+# CLOUDINARY_CLOUD_NAME=your_cloud_name
+# CLOUDINARY_API_KEY=your_api_key
+# CLOUDINARY_API_SECRET=your_api_secret
+# DATABASE_URL=postgresql://user:password@host/dbname
+# ADMIN_PASSWORD=your_secure_password

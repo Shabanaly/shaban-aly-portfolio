@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم — Shaban Aly</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Sans Arabic', system-ui, sans-serif;
+      background: linear-gradient(180deg, #0f1724, #071029);
+      color: #e6edf3;
+      min-height: 100vh;
+    }
+
+    .admin-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Login Form */
+    .login-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .login-box {
+      background: rgba(17, 24, 39, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+      backdrop-filter: blur(10px);
+    }
+
+    .login-box h1 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #9ca3af;
+      font-size: 0.9rem;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      color: #e6edf3;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #06b6d4;
+      background: rgba(6, 182, 212, 0.1);
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background: #06b6d4;
+      color: #0f1724;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #0891b2;
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      background: #6b7280;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Dashboard */
+    .dashboard {
+      display: none;
+    }
+
+    .dashboard.active {
+      display: block;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dashboard-header h1 {
+      font-size: 2rem;
+    }
+
+    .logout-btn {
+      width: auto;
+      padding: 0.5rem 1rem;
+      background: #ef4444;
+      font-size: 0.9rem;
+    }
+
+    .logout-btn:hover {
+      background: #dc2626;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      color: #9ca3af;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      width: auto;
+    }
+
+    .tab-btn.active {
+      color: #06b6d4;
+      border-bottom-color: #06b6d4;
+    }
+
+    .tab-btn:hover:not(.active) {
+      color: #d1d5db;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .form-section {
+      background: rgba(17, 24, 39, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-section h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+    }
+
+    .success-msg, .error-msg {
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .success-msg {
+      background: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .success-msg.show, .error-msg.show {
+      display: block;
+    }
+
+    .error-msg {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .file-input-wrapper {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .file-input-wrapper input[type="file"] {
+      display: none;
+    }
+
+    .file-input-label {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: rgba(6, 182, 212, 0.2);
+      border: 2px dashed #06b6d4;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .file-input-label:hover {
+      background: rgba(6, 182, 212, 0.3);
+    }
+
+    .file-name {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    /* Projects List */
+    .projects-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .project-card {
+      background: rgba(17, 24, 39, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .project-img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .project-info {
+      flex: 1;
+    }
+
+    .project-info h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .project-info p {
+      color: #9ca3af;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-url {
+      color: #06b6d4;
+      word-break: break-all;
+      font-size: 0.9rem;
+    }
+
+    .delete-btn {
+      width: auto;
+      padding: 0.5rem 1rem;
+      background: #ef4444;
+      font-size: 0.85rem;
+    }
+
+    .delete-btn:hover {
+      background: #dc2626;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: #9ca3af;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 600px) {
+      .admin-container {
+        padding: 1rem;
+      }
+
+      .login-box {
+        padding: 1.5rem;
+      }
+
+      .project-card {
+        flex-direction: column;
+      }
+
+      .project-img {
+        width: 100%;
+        height: 200px;
+      }
+
+      .tabs {
+        flex-direction: column;
+      }
+
+      .tab-btn {
+        padding: 0.75rem;
+        border-bottom: none;
+        border-right: 3px solid transparent;
+      }
+
+      .tab-btn.active {
+        border-right-color: #06b6d4;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Screen -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-box">
+      <h1>🔐 لوحة التحكم</h1>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="password">كلمة السر:</label>
+          <input type="password" id="password" required placeholder="أدخل كلمة السر">
+        </div>
+        <button type="submit">دخول</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard" id="dashboard">
+    <div class="admin-container">
+      <div class="dashboard-header">
+        <h1>📊 لوحة التحكم</h1>
+        <button class="logout-btn" onclick="logout()">تسجيل خروج</button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('upload')">📤 رفع صورة</button>
+        <button class="tab-btn" onclick="switchTab('add-project')">➕ إضافة مشروع</button>
+        <button class="tab-btn" onclick="switchTab('manage-projects')">📋 إدارة المشاريع</button>
+      </div>
+
+      <!-- Upload Image Tab -->
+      <div class="tab-content active" id="upload">
+        <div class="form-section">
+          <h2>📤 رفع صورة</h2>
+          <div id="uploadMsg"></div>
+
+          <div class="form-group">
+            <div class="file-input-wrapper">
+              <input type="file" id="imageFile" accept="image/*">
+              <label for="imageFile" class="file-input-label">📁 اختر صورة أو اسحبها هنا</label>
+              <div class="file-name" id="fileName"></div>
+            </div>
+          </div>
+
+          <button onclick="uploadImage()" id="uploadBtn">📤 رفع الصورة</button>
+        </div>
+
+        <div id="uploadHistory"></div>
+      </div>
+
+      <!-- Add Project Tab -->
+      <div class="tab-content" id="add-project">
+        <div class="form-section">
+          <h2>➕ إضافة مشروع جديد</h2>
+          <div id="addProjectMsg"></div>
+
+          <form id="projectForm">
+            <div class="form-group">
+              <label for="projectTitle">اسم المشروع:</label>
+              <input type="text" id="projectTitle" required placeholder="مثال: مختبر Nmap">
+            </div>
+
+            <div class="form-group">
+              <label for="projectDesc">الوصف:</label>
+              <textarea id="projectDesc" rows="4" required placeholder="وصف مختصر للمشروع..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="projectImage">رابط الصورة (Cloudinary):</label>
+              <input type="url" id="projectImage" required placeholder="https://res.cloudinary.com/...">
+            </div>
+
+            <div class="form-group">
+              <label for="projectLink">رابط المشروع:</label>
+              <input type="url" id="projectLink" placeholder="https://github.com/...">
+            </div>
+
+            <button type="submit">➕ إضافة المشروع</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Manage Projects Tab -->
+      <div class="tab-content" id="manage-projects">
+        <div class="form-section">
+          <h2>📋 المشاريع الحالية</h2>
+          <div id="projectsLoading" class="loading">جاري التحميل...</div>
+          <div id="projectsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { ADMIN_CONFIG, API_ENDPOINTS } from './config.js';
+
+    // Check authentication
+    function checkAuth() {
+      const token = localStorage.getItem('admin_token');
+      if (token) {
+        showDashboard();
+      }
+    }
+
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+
+      if (password === ADMIN_CONFIG.PASSWORD) {
+        localStorage.setItem('admin_token', 'authenticated');
+        showDashboard();
+      } else {
+        alert('❌ كلمة السر غير صحيحة');
+        document.getElementById('password').value = '';
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem('admin_token');
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('dashboard').classList.remove('active');
+      document.getElementById('password').value = '';
+    }
+
+    function showDashboard() {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboard').classList.add('active');
+      loadProjects();
+    }
+
+    // Tab switching
+    window.switchTab = function(tabName) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+    };
+
+    // File input change
+    document.getElementById('imageFile').addEventListener('change', (e) => {
+      const fileName = e.target.files[0]?.name || 'لم يتم اختيار ملف';
+      document.getElementById('fileName').textContent = `✓ ${fileName}`;
+    });
+
+    // Upload Image
+    window.uploadImage = async function() {
+      const file = document.getElementById('imageFile').files[0];
+      if (!file) {
+        showMsg('uploadMsg', '❌ الرجاء اختيار صورة', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('uploadBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ جاري الرفع...';
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await fetch(API_ENDPOINTS.UPLOAD_IMAGE, {
+          method: 'POST',
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          showMsg('uploadMsg', `✓ تم الرفع: ${data.url}`, 'success');
+          document.getElementById('imageFile').value = '';
+          document.getElementById('fileName').textContent = '';
+
+          // Copy to clipboard
+          navigator.clipboard.writeText(data.url);
+          alert('✓ تم نسخ الرابط إلى الحافظة!');
+        } else {
+          showMsg('uploadMsg', `❌ ${data.error}`, 'error');
+        }
+      } catch (error) {
+        showMsg('uploadMsg', `❌ خطأ: ${error.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '📤 رفع الصورة';
+      }
+    };
+
+    // Add Project
+    document.getElementById('projectForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const project = {
+        title: document.getElementById('projectTitle').value,
+        description: document.getElementById('projectDesc').value,
+        image: document.getElementById('projectImage').value,
+        link: document.getElementById('projectLink').value,
+      };
+
+      const btn = e.target.querySelector('button');
+      btn.disabled = true;
+      btn.textContent = '⏳ جاري الإضافة...';
+
+      try {
+        const response = await fetch(API_ENDPOINTS.ADD_PROJECT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(project),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          showMsg('addProjectMsg', '✓ تم إضافة المشروع بنجاح', 'success');
+          document.getElementById('projectForm').reset();
+          setTimeout(() => loadProjects(), 1000);
+        } else {
+          showMsg('addProjectMsg', `❌ ${data.error}`, 'error');
+        }
+      } catch (error) {
+        showMsg('addProjectMsg', `❌ خطأ: ${error.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '➕ إضافة المشروع';
+      }
+    });
+
+    // Load Projects
+    async function loadProjects() {
+      try {
+        const response = await fetch(API_ENDPOINTS.GET_PROJECTS);
+        const data = await response.json();
+
+        if (data.success) {
+          const projects = data.projects || [];
+          const container = document.getElementById('projectsList');
+          document.getElementById('projectsLoading').style.display = 'none';
+
+          if (projects.length === 0) {
+            container.innerHTML = '<div class="empty-state">لا توجد مشاريع بعد</div>';
+            return;
+          }
+
+          container.innerHTML = projects.map(p => `
+            <div class="project-card">
+              <img src="${p.image}" alt="${p.title}" class="project-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23333%22 width=%22120%22 height=%22120%22/%3E%3C/svg%3E'">
+              <div class="project-info">
+                <h3>${p.title}</h3>
+                <p>${p.description}</p>
+                ${p.link ? `<p class="project-url"><a href="${p.link}" target="_blank" style="color: #06b6d4;">🔗 فتح الرابط</a></p>` : ''}
+              </div>
+              <button class="delete-btn" onclick="deleteProject(${p.id})">🗑️ حذف</button>
+            </div>
+          `).join('');
+        }
+      } catch (error) {
+        console.error('Error loading projects:', error);
+        document.getElementById('projectsLoading').innerHTML = `<div class="error-msg show">❌ خطأ في التحميل</div>`;
+      }
+    }
+
+    // Delete Project
+    window.deleteProject = async function(id) {
+      if (!confirm('هل متأكد من حذف هذا المشروع؟')) return;
+
+      try {
+        const response = await fetch(`${API_ENDPOINTS.DELETE_PROJECT}&id=${id}`, {
+          method: 'DELETE',
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          alert('✓ تم حذف المشروع');
+          loadProjects();
+        } else {
+          alert(`❌ ${data.error}`);
+        }
+      } catch (error) {
+        alert(`❌ خطأ: ${error.message}`);
+      }
+    };
+
+    // Helper: Show Message
+    function showMsg(elementId, message, type) {
+      const container = document.getElementById(elementId);
+      container.innerHTML = `<div class="${type}-msg show">${message}</div>`;
+      setTimeout(() => {
+        container.innerHTML = '';
+      }, 5000);
+    }
+
+    // Check auth on load
+    checkAuth();
+  </script>
+</body>
+</html>
