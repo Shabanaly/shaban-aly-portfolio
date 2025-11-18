@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary';
 import { Pool } from 'pg';
-import { Readable } from 'stream';
+import Busboy from 'busboy';
 
 // Initialize Cloudinary
 cloudinary.config({
@@ -16,7 +16,6 @@ const pool = new Pool({
 });
 
 export async function handler(event) {
-  // Handle CORS preflight
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
@@ -28,48 +27,34 @@ export async function handler(event) {
     };
   }
 
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: 'Method Not Allowed' }),
+    };
+  }
+
   try {
-    if (event.httpMethod !== 'POST') {
-      return {
-        statusCode: 405,
-        body: JSON.stringify({ error: 'Method Not Allowed' }),
-      };
-    }
+    const { fileBuffer, filename } = await parseMultipart(event);
 
-    // Parse multipart form data
-    const { file, filename } = await parseMultipart(event);
-
-    if (!file) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: 'No file uploaded' }),
-      };
+    if (!fileBuffer) {
+      throw new Error("File not received properly");
     }
 
     // Upload to Cloudinary
-    const uploadResult = await uploadToCloudinary(file, filename);
+    const uploadResult = await uploadToCloudinary(fileBuffer, filename);
 
-    if (!uploadResult.secure_url) {
-      throw new Error('Upload failed');
-    }
-
-    // Save to database
+    // Save to Database
     const client = await pool.connect();
-    try {
-      await client.query(
-        'INSERT INTO images (url, filename, created_at) VALUES ($1, $2, NOW())',
-        [uploadResult.secure_url, filename]
-      );
-    } finally {
-      client.release();
-    }
+    await client.query(
+      'INSERT INTO images (url, filename, created_at) VALUES ($1, $2, NOW())',
+      [uploadResult.secure_url, filename]
+    );
+    client.release();
 
     return {
       statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Access-Control-Allow-Origin': '*' },
       body: JSON.stringify({
         success: true,
         url: uploadResult.secure_url,
@@ -88,43 +73,43 @@ export async function handler(event) {
   }
 }
 
-// Parse multipart form data
-async function parseMultipart(event) {
-  const contentType = event.headers['content-type'] || '';
+// Proper multipart parser (fixes Invalid image file)
+function parseMultipart(event) {
+  return new Promise((resolve, reject) => {
+    const busboy = Busboy({
+      headers: event.headers,
+    });
 
-  if (!contentType.includes('multipart/form-data')) {
-    throw new Error('Invalid content type');
-  }
+    let fileBuffer = null;
+    let filename = 'image.jpg';
 
-  const boundary = contentType.split('boundary=')[1];
-  const body = Buffer.from(event.body, event.isBase64Encoded ? 'base64' : 'utf8');
+    busboy.on('file', (fieldname, file, info) => {
+      filename = info.filename;
+      const chunks = [];
 
-  let file = null;
-  let filename = 'image.jpg';
+      file.on('data', (chunk) => {
+        chunks.push(chunk);
+      });
 
-  const parts = body.toString('utf8').split(`--${boundary}`);
+      file.on('end', () => {
+        fileBuffer = Buffer.concat(chunks);
+      });
+    });
 
-  for (const part of parts) {
-    if (part.includes('filename=')) {
-      const filenameMatch = part.match(/filename="([^"]+)"/);
-      if (filenameMatch) {
-        filename = filenameMatch[1];
-      }
+    busboy.on('finish', () => {
+      resolve({
+        fileBuffer,
+        filename,
+      });
+    });
 
-      const fileStart = part.indexOf('\r\n\r\n') + 4;
-      const fileEnd = part.lastIndexOf('\r\n');
-      file = body.slice(
-        body.indexOf(part) + fileStart,
-        body.indexOf(part) + fileEnd
-      );
-      break;
-    }
-  }
+    busboy.on('error', reject);
 
-  return { file, filename };
+    busboy.end(event.body, event.isBase64Encoded ? "base64" : "utf8");
+  });
 }
 
-// Upload to Cloudinary using buffer
+// Upload to Cloudinary
 function uploadToCloudinary(buffer, filename) {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
@@ -132,7 +117,7 @@ function uploadToCloudinary(buffer, filename) {
         resource_type: 'image',
         type: 'upload',
         folder: 'projects',
-        public_id: `projects/${Date.now()}`,
+        public_id: `${Date.now()}`,
       },
       (error, result) => {
         if (error) reject(error);
