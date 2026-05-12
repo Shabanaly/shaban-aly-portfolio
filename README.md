@@ -44,7 +44,7 @@ static-html/
   data/
     projects.json
   assets/
-    Icons8/
+    IconsFrameWorkes/
     images/
 ```
 
@@ -96,5 +96,5 @@ Build command: leave empty
 **Shaban Aly**
 
 - Portfolio: This project
-- Email: O0P4o@example.com
+- Email: sa676185@gmail.com
 
