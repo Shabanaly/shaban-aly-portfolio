@@ -96,5 +96,4 @@ Build command: leave empty
 **Shaban Aly**
 
 - Portfolio: This project
-- Email: sa676185@gmail.com
-
+- Email: <sa676185@gmail.com>
