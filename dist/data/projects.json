@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "title": "Daleel Al-Suez",
+    "slug": "daleel-al-suez",
+    "category": "Business Directory Platform",
+    "description": "A modern digital business directory platform for Suez Governorate that helps users discover local businesses, services, restaurants, shops, doctors, and companies through an organized and searchable interface. The platform focuses on improving local business visibility and simplifying access to trusted information for residents and visitors.",
+    "technologies": [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "TypeScript",
+      "Responsive Design"
+    ],
+    "features": [
+      "Business listings",
+      "Category filtering",
+      "Responsive design",
+      "SEO-friendly structure",
+      "Local business discovery"
+    ],
+    "status": "Live",
+    "url": "https://daleel-al-suez.com/",
+    "image": "/assets/images/projects/suez.png"
+  },
+  {
+    "id": 2,
+    "title": "Daleel Al-Suez Tools",
+    "slug": "daleel-tools",
+    "category": "Web Tools Platform",
+    "description": "A collection of online productivity and utility tools designed to simplify everyday digital tasks. The platform provides fast, lightweight, and user-friendly tools accessible directly from the browser without requiring installation or registration.",
+    "technologies": [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "TypeScript",
+      "Utility-focused design"
+    ],
+    "features": [
+      "Browser-based tools",
+      "Fast performance",
+      "Responsive UI",
+      "Minimal design",
+      "Utility-focused experience"
+    ],
+    "status": "Live",
+    "url": "https://tools.daleel-al-suez.com/",
+    "image": "/assets/images/projects/tools.webp"
+  },
+  {
+    "id": 3,
+    "title": "Portfolio Website",
+    "slug": "portfolio",
+    "category": "Personal Portfolio",
+    "description": "A responsive personal portfolio website created to showcase projects, technical skills, and development experience with a clean user interface and smooth interactive animations.",
+    "technologies": ["HTML", "CSS", "JavaScript"],
+    "features": [
+      "Dark mode",
+      "Responsive layout",
+      "Interactive animations",
+      "Project showcase",
+      "Modern UI"
+    ],
+    "status": "In Progress",
+    "url": "#",
+    "image": "/assets/images/me/me.png"
+  }
+]

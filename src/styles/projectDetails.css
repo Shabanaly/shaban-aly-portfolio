@@ -1,0 +1,114 @@
+.project-details {
+  padding-top: 96px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  margin-bottom: 24px;
+  padding: 0 14px;
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  background-color: var(--bg-card);
+  color: var(--text-secondary);
+  font-weight: 800;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-link:hover {
+  transform: translateY(-2px);
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.project-details-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(24px, 5vw, 48px);
+  align-items: start;
+}
+
+.project-details-image {
+  overflow: hidden;
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  background-color: var(--bg-card);
+  box-shadow: var(--shadow-md);
+}
+
+.project-details-image img {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+}
+
+.project-details-content {
+  min-width: 0;
+}
+
+.project-details-content h1 {
+  margin-top: 8px;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.08;
+}
+
+.project-details-content > p {
+  margin-top: 18px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.project-meta span {
+  padding: 7px 10px;
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.project-details-block {
+  margin-top: 28px;
+}
+
+.project-details-block h2 {
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.feature-list {
+  display: grid;
+  gap: 10px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.feature-list li {
+  padding-left: 2px;
+}
+
+.project-details-content .primary-link {
+  margin-top: 30px;
+}
+
+@media (max-width: 767px) {
+  .project-details {
+    padding-top: 84px;
+  }
+
+  .project-details-layout {
+    grid-template-columns: 1fr;
+  }
+}
