@@ -14,7 +14,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group relative flex flex-col rounded-2xl border border-(--border-primary) bg-(--bg-card) overflow-hidden shadow-(--shadow-sm) hover:shadow-(--shadow-lg) hover:border-(--brand-primary)/40 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
+      className="group relative flex flex-col rounded-2xl border border-(--border-primary) bg-(--bg-card) overflow-hidden shadow-(--shadow-md) hover:shadow-(--shadow-lg) hover:border-(--brand-primary)/50 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
     >
       {/* Top Index & Arrow Indicator */}
       <div className="flex items-center justify-between px-5 pt-5 pb-3">

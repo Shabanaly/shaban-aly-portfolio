@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Project, ProfileSettings } from "@/types";
+import { useConfirm } from "@/context/ConfirmContext";
 import {
   togglePublishAction,
   deleteProjectAction,
@@ -33,6 +34,7 @@ interface Props {
 }
 
 export function DashboardClient({ initialProjects, initialProfile }: Props) {
+  const { confirm, alert } = useConfirm();
   const [activeTab, setActiveTab] = useState<"projects" | "profile">("projects");
   const [projects, setProjects] = useState<Project[]>(initialProjects);
   const [searchQuery, setSearchQuery] = useState("");
@@ -64,7 +66,16 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
   }
 
   async function handleDelete(id: string, slug: string, title: string) {
-    if (!confirm(`Are you sure you want to delete project "${title}"?`)) {
+    const isConfirmed = await confirm({
+      title: "Delete Project",
+      message: `Are you sure you want to permanently delete "${title}"? This action cannot be undone.`,
+      confirmText: "Yes, Delete",
+      cancelText: "Cancel",
+      variant: "danger",
+      icon: "trash",
+    });
+
+    if (!isConfirmed) {
       return;
     }
 
@@ -75,7 +86,11 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
     if (res?.success) {
       setProjects((prev) => prev.filter((p) => p.id !== id));
     } else {
-      alert("Error deleting project: " + (res?.error || "Unknown error"));
+      await alert({
+        title: "Delete Failed",
+        message: res?.error || "An unknown error occurred while deleting the project.",
+        variant: "danger",
+      });
     }
   }
 
@@ -92,7 +107,11 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
       setProfileSuccess(true);
       setTimeout(() => setProfileSuccess(false), 4000);
     } else {
-      alert("Error updating profile: " + (res?.error || "Unknown error"));
+      await alert({
+        title: "Update Failed",
+        message: res?.error || "An unknown error occurred while updating profile settings.",
+        variant: "danger",
+      });
     }
   }
 
