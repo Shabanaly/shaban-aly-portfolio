@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { signOutAdmin } from "@/app/admin/actions";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useConfirm } from "@/context/ConfirmContext";
-import { Globe, LogOut, LayoutDashboard } from "lucide-react";
+import { Globe, LogOut } from "lucide-react";
 
 export function AdminHeader() {
   const { confirm } = useConfirm();
@@ -26,8 +27,15 @@ export function AdminHeader() {
     <header className="border-b border-(--border-primary) bg-(--bg-header) backdrop-blur px-4 py-3 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <Link href="/admin" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
-          <div className="w-8 h-8 rounded-lg bg-(--brand-primary) text-white flex items-center justify-center font-bold">
-            <LayoutDashboard className="w-4 h-4" />
+          <div className="w-8 h-8 rounded-lg overflow-hidden border border-(--border-primary) flex items-center justify-center flex-shrink-0 shadow-xs">
+            <Image
+              src="/assets/favicon.png"
+              alt="Shaban Aly Logo"
+              width={22}
+              height={22}
+              className="rounded"
+              priority
+            />
           </div>
           <div>
             <h1 className="text-base font-extrabold leading-none">

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
@@ -19,7 +20,16 @@ export function Navbar() {
   return (
     <header className="site-header">
       <Link href="/#home" className="brand flex items-center gap-2" onClick={closeMobileMenu}>
-        <span className="text-(--brand-primary) font-mono font-black">&lt;/&gt;</span>
+        <div className="relative w-6 h-6 sm:w-7 sm:h-7 rounded-lg overflow-hidden border border-(--border-primary) flex-shrink-0 shadow-xs">
+          <Image
+            src="/assets/favicon.png"
+            alt="Shaban Aly Logo"
+            fill
+            sizes="28px"
+            className="object-cover"
+            priority
+          />
+        </div>
         <span>Shaban Aly</span>
       </Link>
 
