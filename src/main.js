@@ -7,6 +7,7 @@ import { renderProjects } from "./projects.js";
 import createSocialLinks from "./socialLinks.js";
 import { handleProjectDetailsRoute } from "./projectDetails.js";
 import { setHomeMeta } from "./seo.js";
+import { withBasePath } from "./constants/paths.js";
 
 const app = document.querySelector("#app");
 
@@ -63,7 +64,7 @@ function renderHomePage() {
         </div>
 
         <div class="hero-image">
-          <img src="/assets/images/me/me.png" alt="Shaban Aly" />
+          <img src="${withBasePath("assets/images/me/me.png")}" alt="Shaban Aly" />
         </div>
       </div>
     </section>

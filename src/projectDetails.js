@@ -1,8 +1,9 @@
 import { Project } from "./projectModel.js";
 import { setProjectMeta } from "./seo.js";
+import { withBasePath } from "./constants/paths.js";
 
 async function getProjects() {
-  const response = await fetch("/data/projects.json");
+  const response = await fetch(withBasePath("data/projects.json"));
 
   if (!response.ok) {
     throw new Error("Failed to load projects");

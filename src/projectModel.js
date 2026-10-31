@@ -1,3 +1,5 @@
+import { withBasePath } from "./constants/paths.js";
+
 export class Project {
   constructor({
     id,
@@ -20,7 +22,7 @@ export class Project {
     this.features = features;
     this.status = status;
     this.url = url;
-    this.image = image;
+    this.image = withBasePath(image);
   }
 
   getShortDescription() {

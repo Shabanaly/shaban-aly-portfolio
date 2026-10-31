@@ -1,8 +1,10 @@
+import { withBasePath } from "./constants/paths.js";
+
 const siteName = "Shaban Aly Portfolio";
 const defaultTitle = "Shaban Aly | Frontend Developer Portfolio";
 const defaultDescription =
   "Frontend developer portfolio for Shaban Aly, showcasing responsive web projects, practical interfaces, and modern JavaScript experiences.";
-const defaultImage = "/assets/portfolio.png";
+const defaultImage = withBasePath("assets/favicon.png");
 
 function getAbsoluteUrl(path = "/") {
   return new URL(path, window.location.origin).href;
@@ -47,7 +49,7 @@ export function setPageMeta({
 }
 
 export function setHomeMeta() {
-  setPageMeta();
+  setPageMeta({ url: import.meta.env.BASE_URL });
 }
 
 export function setProjectMeta(project) {
@@ -55,7 +57,7 @@ export function setProjectMeta(project) {
     title: `${project.title} | Project Details | Shaban Aly`,
     description: project.description,
     image: project.image,
-    url: `/#project/${project.slug}`,
+    url: withBasePath(`#project/${project.slug}`),
     type: "article",
   });
 }

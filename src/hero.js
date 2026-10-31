@@ -1,3 +1,5 @@
+import { withBasePath } from "./constants/paths.js";
+
 const icons = [
   "angularjs.png",
   "javascript.png",
@@ -37,7 +39,7 @@ export function initHero() {
 
   const floatingIcons = icons.map((iconName) => {
     const icon = document.createElement("img");
-    icon.src = `/assets/IconsFrameWorkes/${iconName}`;
+    icon.src = withBasePath(`assets/IconsFrameWorkes/${iconName}`);
     icon.alt = iconName.split(".")[0];
     icon.classList.add("tech-icon");
     container.appendChild(icon);

@@ -1,99 +1,67 @@
 # Shaban Aly Portfolio
 
-A personal portfolio website for showcasing projects, skills, and contact information. The project is built with plain HTML, CSS, and JavaScript, with a clean responsive layout, dark mode support, project cards loaded from JSON, and simple interactive animations.
+A responsive personal portfolio website for showcasing my frontend projects,
+skills, and contact information.
 
 ## Features
 
-- Responsive layout for desktop, tablet, and mobile screens
-- Dark and light theme toggle with saved user preference
-- Mobile navigation menu
-- Animated hero section with floating technology icons
-- Projects rendered dynamically from `projects.json`
-- Separate pages for Home, Projects, About, and Contact
-- Static website structure that can be deployed easily
+- Responsive layout for desktop, tablet, and mobile
+- Dark and light themes with saved preferences
+- Animated technology icons
+- Projects loaded from JSON
+- Hash-based project detail pages
+- SEO and social sharing metadata
+- Automated deployment to GitHub Pages
 
-## Tech Stack
+## Built With
 
 - HTML5
 - CSS3
 - Vanilla JavaScript
+- Vite
 - Font Awesome
-- JSON for project data
+
+## Local Development
+
+Requirements: Node.js 20.19 or newer.
+
+```bash
+npm install
+npm run dev
+```
+
+Create a production build:
+
+```bash
+npm run build
+npm run preview
+```
 
 ## Project Structure
 
-```txt
-static-html/
-  index.html
-  about/
-    index.html
-  contact/
-    index.html
-  projects/
-    index.html
-  css/
-    colors.css
-    index.css
-    projects.css
-  js/
-    index.js
-    theme.js
-    projects.js
-    projectModel.js
-    animation_hero.js
-  data/
-    projects.json
-  assets/
-    IconsFrameWorkes/
-    images/
+```text
+.
+├── public/                 # Static assets and project data
+├── src/                    # JavaScript modules and styles
+├── .github/workflows/      # GitHub Pages deployment
+├── index.html
+├── package.json
+└── vite.config.js
 ```
-
-## Getting Started
-
-This is a static website, so it does not require a build step.
-
-You can run it locally using a simple local server. For example, with VS Code you can use the Live Server extension and open:
-
-```txt
-static-html/index.html
-```
-
-Or serve the folder with any static server.
-
-## Project Data
-
-Projects are stored in:
-
-```txt
-static-html/data/projects.json
-```
-
-Each project includes:
-
-- title
-- category
-- description
-- technologies
-- features
-- status
-- URL
-- image
 
 ## Deployment
 
-The project can be deployed on any static hosting platform, including Netlify, Vercel, GitHub Pages, or Cloudflare Pages.
+Every push to the `main` branch builds and deploys the site through GitHub
+Actions. In the repository settings, set **Pages → Source** to **GitHub
+Actions**.
 
-For Netlify:
-
-```txt
-Base directory: static-html
-Publish directory: static-html
-Build command: leave empty
-```
+Live URL:
+[shabanaly.github.io/shaban-aly-portfolio](https://shabanaly.github.io/shaban-aly-portfolio/)
 
 ## Author
 
-**Shaban Aly**
+Shaban Aly
 
-- Portfolio: This project
-- Email: <sa676185@gmail.com>
+- [GitHub](https://github.com/Shabanaly)
+- [LinkedIn](https://www.linkedin.com/in/shaban-ali-03982a329/)
+- [Email](mailto:sa676185@gmail.com)
