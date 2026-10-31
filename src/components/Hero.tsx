@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ProfileSettings } from "@/types";
@@ -19,12 +20,122 @@ const techIcons = [
   { name: "Vue.js", file: "vuejs.png" },
 ];
 
+const floatingIconFiles = [
+  "javascript.png",
+  "typescript.png",
+  "react.png",
+  "nextjs.png",
+  "node.png",
+  "redux.png",
+];
+
 export function Hero({ profile }: HeroProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    // Only animate floating icons on desktop/tablet screens (>= 768px)
+    if (typeof window === "undefined" || window.innerWidth < 768) {
+      return;
+    }
+
+    const hero = heroRef.current;
+    const container = containerRef.current;
+    if (!hero || !container) return;
+
+    let animationFrameId: number;
+    let isCleanedUp = false;
+
+    const elements: Array<{
+      element: HTMLElement;
+      x: number;
+      y: number;
+      dx: number;
+      dy: number;
+    }> = [];
+
+    container.innerHTML = "";
+
+    floatingIconFiles.forEach((iconName) => {
+      const badge = document.createElement("div");
+      badge.classList.add("tech-icon-badge");
+
+      const img = document.createElement("img");
+      img.src = `/assets/IconsFrameWorkes/${iconName}`;
+      img.alt = iconName.split(".")[0];
+      badge.appendChild(img);
+      container.appendChild(badge);
+
+      const heroW = hero.clientWidth || 1000;
+      const heroH = hero.clientHeight || 650;
+
+      elements.push({
+        element: badge,
+        x: Math.random() * (heroW - 140) + 30,
+        y: Math.random() * (heroH - 200) + 60,
+        dx: (Math.random() - 0.5) * 0.8,
+        dy: (Math.random() - 0.5) * 0.8,
+      });
+    });
+
+    const animate = () => {
+      if (isCleanedUp) return;
+
+      const heroWidth = hero.clientWidth;
+      const heroHeight = hero.clientHeight;
+      const minX = 25;
+      const maxX = Math.max(heroWidth - 75, 30);
+      const minY = 40;
+      const maxY = Math.max(heroHeight - 80, 50);
+
+      elements.forEach((item) => {
+        item.x += item.dx;
+        item.y += item.dy;
+
+        // Strictly bounce within boundaries
+        if (item.x <= minX) {
+          item.x = minX;
+          item.dx = Math.abs(item.dx);
+        } else if (item.x >= maxX) {
+          item.x = maxX;
+          item.dx = -Math.abs(item.dx);
+        }
+
+        if (item.y <= minY) {
+          item.y = minY;
+          item.dy = Math.abs(item.dy);
+        } else if (item.y >= maxY) {
+          item.y = maxY;
+          item.dy = -Math.abs(item.dy);
+        }
+
+        item.element.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      isCleanedUp = true;
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
   return (
     <section
       className="hero section pt-28 sm:pt-36 pb-12 sm:pb-20 relative overflow-hidden"
       id="home"
+      ref={heroRef}
     >
+      {/* Background Floating Glass Badges (Subtle, non-intrusive, strictly bounded) */}
+      <div
+        className="floating-icons hidden md:block"
+        aria-hidden="true"
+        ref={containerRef}
+      />
+
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Main Content Column */}
         <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
@@ -111,9 +222,9 @@ export function Hero({ profile }: HeroProps) {
         </div>
 
         {/* Desktop Media Column (Photo + Aura + Floating Code Snippet) */}
-        <div className="hidden lg:flex lg:col-span-5 relative items-center justify-center">
-          {/* Circular Glow Aura */}
-          <div className="absolute w-80 h-80 rounded-full bg-gradient-to-tr from-blue-500/15 to-indigo-500/10 dark:from-(--brand-primary)/20 dark:to-(--brand-secondary)/20 blur-3xl pointer-events-none" />
+        <div className="hidden lg:flex lg:col-span-5 relative items-center justify-center overflow-hidden py-4">
+          {/* Circular Glow Aura (Strictly contained) */}
+          <div className="absolute w-72 h-72 rounded-full bg-gradient-to-tr from-blue-500/15 to-indigo-500/10 dark:from-(--brand-primary)/20 dark:to-(--brand-secondary)/20 blur-2xl pointer-events-none" />
 
           {/* Profile Image with Ring */}
           <div className="relative w-72 h-72 rounded-full p-2 border-4 border-white dark:border-(--brand-primary)/40 bg-white dark:bg-(--bg-card) shadow-xl dark:shadow-2xl overflow-hidden group">
@@ -127,8 +238,8 @@ export function Hero({ profile }: HeroProps) {
             />
           </div>
 
-          {/* Floating Code Card Snippet */}
-          <div className="absolute -bottom-4 -right-4 w-60 p-3.5 rounded-xl bg-[#0f172a] text-slate-100 border border-slate-700/60 shadow-2xl shadow-slate-900/25 backdrop-blur-md font-mono text-[11px] leading-relaxed select-none">
+          {/* Floating Code Card Snippet (Inside column boundaries) */}
+          <div className="absolute -bottom-2 right-0 w-60 p-3.5 rounded-xl bg-[#0f172a] text-slate-100 border border-slate-700/60 shadow-2xl shadow-slate-900/25 backdrop-blur-md font-mono text-[11px] leading-relaxed select-none">
             <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-700/60">
               <div className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block" />

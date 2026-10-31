@@ -106,7 +106,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={inter.className} suppressHydrationWarning>
+      <body
+        className={`${inter.className} overflow-x-hidden w-full max-w-full`}
+        suppressHydrationWarning
+      >
         <ThemeProvider
           attribute="data-theme"
           defaultTheme="system"

@@ -60,7 +60,7 @@ export function ContactSection({ profile }: ContactSectionProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Column 1: Have a Project in Mind CTA */}
-        <div className="p-6 sm:p-7 rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) flex flex-col justify-between space-y-6">
+        <div className="p-6 sm:p-7 rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) flex flex-col justify-between space-y-6 min-w-0 overflow-hidden">
           <div className="space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-(--accent-secondary)">
               Let&apos;s Work Together
@@ -84,7 +84,7 @@ export function ContactSection({ profile }: ContactSectionProps) {
         </div>
 
         {/* Column 2: Testimonial Quote Card */}
-        <div className="p-6 sm:p-7 rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) flex flex-col justify-between space-y-6">
+        <div className="p-6 sm:p-7 rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) flex flex-col justify-between space-y-6 min-w-0 overflow-hidden">
           <div className="space-y-4">
             <div className="w-10 h-10 rounded-xl bg-(--brand-primary)/10 text-(--brand-primary) flex items-center justify-center">
               <Quote className="w-5 h-5" />
@@ -110,14 +110,14 @@ export function ContactSection({ profile }: ContactSectionProps) {
         </div>
 
         {/* Column 3: Follow Me & Direct Contact Info */}
-        <div className="p-6 sm:p-7 rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) flex flex-col justify-between space-y-6">
+        <div className="p-6 sm:p-7 rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) flex flex-col justify-between space-y-6 min-w-0 overflow-hidden">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-(--accent-secondary) block mb-3">
               Follow &amp; Contact Me
             </span>
 
-            {/* Social Icons row (4 icons in a neat row) */}
-            <div className="flex items-center gap-2.5 mb-6">
+            {/* Social Icons row */}
+            <div className="flex flex-wrap items-center gap-2.5 mb-6">
               {socialIcons.map((link: SocialLink) => (
                 <a
                   key={link.name}
