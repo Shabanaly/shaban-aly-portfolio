@@ -27,7 +27,6 @@ const floatingIconFiles = [
   "nextjs.png",
   "node.png",
   "redux.png",
-  "vuejs.png",
 ];
 
 export function Hero({ profile }: HeroProps) {
@@ -35,7 +34,7 @@ export function Hero({ profile }: HeroProps) {
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // Only animate floating icons on desktop screens (>= 768px) to prevent mobile clutter
+    // Only animate floating icons on desktop screens (>= 768px)
     if (typeof window === "undefined" || window.innerWidth < 768) {
       return;
     }
@@ -48,7 +47,7 @@ export function Hero({ profile }: HeroProps) {
     let isCleanedUp = false;
 
     const elements: Array<{
-      element: HTMLImageElement;
+      element: HTMLElement;
       x: number;
       y: number;
       dx: number;
@@ -58,18 +57,25 @@ export function Hero({ profile }: HeroProps) {
     container.innerHTML = "";
 
     floatingIconFiles.forEach((iconName) => {
+      // Create a glassmorphic badge container for every floating icon
+      const badge = document.createElement("div");
+      badge.classList.add("tech-icon-badge");
+
       const img = document.createElement("img");
       img.src = `/assets/IconsFrameWorkes/${iconName}`;
       img.alt = iconName.split(".")[0];
-      img.classList.add("tech-icon");
-      container.appendChild(img);
+      badge.appendChild(img);
+      container.appendChild(badge);
+
+      const heroW = hero.clientWidth || 1000;
+      const heroH = hero.clientHeight || 650;
 
       elements.push({
-        element: img,
-        x: Math.random() * (hero.clientWidth - 80),
-        y: Math.random() * (hero.clientHeight - 80),
-        dx: (Math.random() - 0.5) * 1.0,
-        dy: (Math.random() - 0.5) * 1.0,
+        element: badge,
+        x: Math.random() * (heroW - 140) + 30,
+        y: Math.random() * (heroH - 240) + 60,
+        dx: (Math.random() - 0.5) * 0.9,
+        dy: (Math.random() - 0.5) * 0.9,
       });
     });
 
@@ -78,17 +84,26 @@ export function Hero({ profile }: HeroProps) {
 
       const heroWidth = hero.clientWidth;
       const heroHeight = hero.clientHeight;
+      const minY = 50;
+      const maxY = Math.min(heroHeight - 120, 620); // Strict lower bound to never escape hero
 
-      elements.forEach((icon) => {
-        const size = icon.element.offsetWidth || 44;
+      elements.forEach((item) => {
+        const size = item.element.offsetWidth || 48;
 
-        icon.x += icon.dx;
-        icon.y += icon.dy;
+        item.x += item.dx;
+        item.y += item.dy;
 
-        if (icon.x <= 0 || icon.x >= heroWidth - size) icon.dx *= -1;
-        if (icon.y <= 0 || icon.y >= heroHeight - size) icon.dy *= -1;
+        // Bounce horizontally
+        if (item.x <= 20 || item.x >= heroWidth - size - 20) {
+          item.dx *= -1;
+        }
 
-        icon.element.style.transform = `translate3d(${icon.x}px, ${icon.y}px, 0)`;
+        // Bounce vertically inside strictly bounded hero atmosphere
+        if (item.y <= minY || item.y >= maxY - size) {
+          item.dy *= -1;
+        }
+
+        item.element.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
       });
 
       animationFrameId = requestAnimationFrame(animate);
@@ -108,9 +123,9 @@ export function Hero({ profile }: HeroProps) {
       id="home"
       ref={heroRef}
     >
-      {/* Background Bouncing Icons: Strictly Desktop only */}
+      {/* Background Floating Glass Badges: Clearly visible & strictly bounded */}
       <div
-        className="floating-icons opacity-25 hidden md:block"
+        className="floating-icons hidden md:block"
         aria-hidden="true"
         ref={containerRef}
       />
@@ -119,7 +134,7 @@ export function Hero({ profile }: HeroProps) {
         {/* Main Content Column */}
         <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
           {/* Eyebrow Tag */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--brand-primary)]/10 border border-[var(--brand-primary)]/20 text-[var(--brand-primary)] text-xs font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--brand-primary)]/10 border border-[var(--brand-primary)]/20 text-[var(--brand-primary)] text-xs font-extrabold uppercase tracking-wider">
             <span className="w-2 h-2 rounded-full bg-[var(--brand-primary)] animate-pulse" />
             <span>{profile.eyebrow || "I'M A WEB DEVELOPER"}</span>
           </div>
@@ -131,14 +146,14 @@ export function Hero({ profile }: HeroProps) {
               {profile.full_name}
             </span>
             <br />
-            <span className="text-[var(--text-secondary)] font-bold text-2xl sm:text-4xl lg:text-5xl block mt-1">
+            <span className="text-slate-800 dark:text-[var(--text-primary)]/80 font-bold text-2xl sm:text-4xl lg:text-5xl block mt-2">
               I build things for the web.
             </span>
           </h1>
 
           {/* Mobile Profile Photo (Shows right after title on mobile only) */}
           <div className="block lg:hidden my-6">
-            <div className="relative w-44 h-44 sm:w-56 sm:h-56 mx-auto rounded-full p-2 border-2 border-[var(--brand-primary)]/30 bg-[var(--bg-card)] shadow-xl overflow-hidden">
+            <div className="relative w-44 h-44 sm:w-56 sm:h-56 mx-auto rounded-full p-2 border-4 border-white dark:border-[var(--brand-primary)]/40 bg-white dark:bg-[var(--bg-card)] shadow-xl overflow-hidden">
               <Image
                 src={profile.profile_image_url || "/assets/images/me/me.png"}
                 alt={profile.full_name}
@@ -150,7 +165,7 @@ export function Hero({ profile }: HeroProps) {
           </div>
 
           {/* Bio Description */}
-          <p className="text-sm sm:text-base lg:text-lg text-[var(--text-secondary)] max-w-xl mx-auto lg:mx-0 leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-[var(--text-secondary)] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
             {profile.hero_description ||
               "I'm a passionate web developer specializing in building exceptional digital experiences with modern technologies."}
           </p>
@@ -159,7 +174,7 @@ export function Hero({ profile }: HeroProps) {
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
             <Link
               href="#projects"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[var(--brand-primary)] text-white font-extrabold text-sm hover:opacity-90 shadow-md hover:shadow-[var(--glow-primary)] hover:-translate-y-0.5 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[var(--brand-primary)] text-white font-extrabold text-sm hover:opacity-95 shadow-md hover:shadow-[var(--glow-primary)] hover:-translate-y-0.5 transition-all"
             >
               <span>View My Work</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -169,7 +184,7 @@ export function Hero({ profile }: HeroProps) {
               href={profile.resume_url || "/resume.pdf"}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border-primary)] text-[var(--text-primary)] font-extrabold text-sm hover:border-[var(--brand-primary)] hover:bg-[var(--bg-card-hover)] hover:-translate-y-0.5 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border-primary)] text-[var(--text-primary)] font-extrabold text-sm hover:border-[var(--brand-primary)] hover:bg-[var(--bg-card-hover)] hover:-translate-y-0.5 shadow-sm transition-all"
             >
               <Download className="w-4 h-4 text-[var(--brand-primary)]" />
               <span>Download CV</span>
@@ -177,7 +192,7 @@ export function Hero({ profile }: HeroProps) {
           </div>
 
           {/* Technologies Strip */}
-          <div className="pt-6 border-t border-[var(--border-primary)]/40 max-w-lg mx-auto lg:mx-0">
+          <div className="pt-6 border-t border-[var(--border-primary)] max-w-lg mx-auto lg:mx-0">
             <p className="text-xs uppercase tracking-wider font-extrabold text-[var(--text-muted)] mb-3">
               Technologies I Work With
             </p>
@@ -185,7 +200,7 @@ export function Hero({ profile }: HeroProps) {
               {techIcons.map((tech) => (
                 <div
                   key={tech.name}
-                  className="w-9 h-9 rounded-lg p-1.5 bg-[var(--bg-card)] border border-[var(--border-primary)] shadow-sm flex items-center justify-center hover:-translate-y-1 hover:border-[var(--brand-primary)]/50 transition-all"
+                  className="w-10 h-10 rounded-xl p-2 bg-[var(--bg-card)] border border-[var(--border-primary)] shadow-sm flex items-center justify-center hover:-translate-y-1 hover:border-[var(--brand-primary)] transition-all"
                   title={tech.name}
                 >
                   <img
@@ -202,10 +217,10 @@ export function Hero({ profile }: HeroProps) {
         {/* Desktop Media Column (Photo + Aura + Floating Code Snippet) */}
         <div className="hidden lg:flex lg:col-span-5 relative items-center justify-center">
           {/* Circular Glow Aura */}
-          <div className="absolute w-80 h-80 rounded-full bg-gradient-to-tr from-[var(--brand-primary)]/20 to-[var(--brand-secondary)]/20 blur-3xl pointer-events-none" />
+          <div className="absolute w-80 h-80 rounded-full bg-gradient-to-tr from-blue-500/15 to-indigo-500/10 dark:from-[var(--brand-primary)]/20 dark:to-[var(--brand-secondary)]/20 blur-3xl pointer-events-none" />
 
           {/* Profile Image with Ring */}
-          <div className="relative w-72 h-72 rounded-full p-2 border-2 border-[var(--brand-primary)]/30 bg-[var(--bg-card)] shadow-2xl overflow-hidden group">
+          <div className="relative w-72 h-72 rounded-full p-2 border-4 border-white dark:border-[var(--brand-primary)]/40 bg-white dark:bg-[var(--bg-card)] shadow-xl dark:shadow-2xl overflow-hidden group">
             <Image
               src={profile.profile_image_url || "/assets/images/me/me.png"}
               alt={profile.full_name}
@@ -216,22 +231,22 @@ export function Hero({ profile }: HeroProps) {
           </div>
 
           {/* Floating Code Card Snippet */}
-          <div className="absolute -bottom-4 -right-4 w-60 p-3.5 rounded-xl bg-neutral-950/90 text-neutral-200 border border-neutral-800 shadow-2xl backdrop-blur-md font-mono text-[11px] leading-relaxed select-none">
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-neutral-800/80">
+          <div className="absolute -bottom-4 -right-4 w-60 p-3.5 rounded-xl bg-[#0f172a] text-slate-100 border border-slate-700/60 shadow-2xl shadow-slate-900/25 backdrop-blur-md font-mono text-[11px] leading-relaxed select-none">
+            <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-700/60">
               <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block" />
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block" />
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block" />
               </div>
-              <div className="flex items-center gap-1 text-[10px] text-neutral-400">
+              <div className="flex items-center gap-1 text-[10px] text-slate-400">
                 <Terminal className="w-3 h-3" />
                 <span>developer.ts</span>
               </div>
             </div>
 
             <div>
-              <span className="text-indigo-400">const</span>{" "}
-              <span className="text-emerald-400">developer</span> = &#123;
+              <span className="text-indigo-400 font-bold">const</span>{" "}
+              <span className="text-emerald-400 font-bold">developer</span> = &#123;
             </div>
             <div className="pl-3">
               name: <span className="text-amber-300">&quot;Shaban Aly&quot;</span>,

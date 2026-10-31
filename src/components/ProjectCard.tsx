@@ -14,7 +14,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group relative flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] overflow-hidden shadow-[var(--shadow-sm)] hover:shadow-2xl hover:border-[var(--brand-primary)]/50 hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+      className="group relative flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] overflow-hidden shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-lg)] hover:border-[var(--brand-primary)]/40 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
     >
       {/* Top Index & Arrow Indicator */}
       <div className="flex items-center justify-between px-5 pt-5 pb-3">
@@ -28,7 +28,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
       {/* Image Preview Container */}
       <div className="px-5 pb-2">
-        <div className="overflow-hidden rounded-xl border border-[var(--border-primary)] aspect-[16/10] relative bg-neutral-900/10 dark:bg-neutral-900/40">
+        <div className="overflow-hidden rounded-xl border border-[var(--border-primary)] aspect-[16/10] relative bg-slate-100 dark:bg-neutral-900/40">
           <Image
             src={project.image_url}
             alt={project.title}
@@ -46,7 +46,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             {project.category}
           </span>
           <span
-            className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
+            className={`text-[10px] px-2.5 py-0.5 rounded-full font-bold ${
               project.status.toLowerCase() === "live"
                 ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
                 : "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
@@ -65,7 +65,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         </p>
 
         {/* Technologies Badges */}
-        <div className="mt-auto pt-3 border-t border-[var(--border-primary)]/50">
+        <div className="mt-auto pt-3 border-t border-[var(--border-primary)]">
           <ul className="flex flex-wrap gap-1.5">
             {project.technologies.slice(0, 4).map((tech) => (
               <li

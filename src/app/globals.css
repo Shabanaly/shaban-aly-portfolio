@@ -3,40 +3,46 @@
 :root {
   --brand-primary: #1a40ff;
   --brand-secondary: #f07a30;
-  --brand-success: #5eeeb2;
+  --brand-success: #10b981;
   --accent-primary: var(--brand-primary);
   --accent-secondary: var(--brand-secondary);
-  --bg-page: #ffffff;
-  --bg-surface: #f8f9fc;
+
+  /* Light Theme (Crisp, High-Depth, High-Contrast & Harmonious) */
+  --bg-page: #f8fafc;
+  --bg-surface: #f1f5f9;
   --bg-card: #ffffff;
-  --bg-card-hover: #f2f5ff;
-  --bg-header: rgba(255, 255, 255, 0.88);
-  --text-primary: #0a0f2e;
-  --text-secondary: #4a5078;
-  --text-muted: #7b82a8;
+  --bg-card-hover: #ffffff;
+  --bg-header: rgba(248, 250, 252, 0.90);
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
   --text-inverse: #ffffff;
-  --border-primary: #e2e4ef;
-  --shadow-sm: 0 1px 3px rgba(0, 11, 61, 0.06);
-  --shadow-md: 0 4px 16px rgba(0, 11, 61, 0.08);
-  --shadow-lg: 0 8px 32px rgba(0, 11, 61, 0.12);
-  --glow-primary: 0 0 20px rgba(26, 64, 255, 0.3);
+  --border-primary: #e2e8f0;
+
+  --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+  --shadow-md: 0 4px 18px -2px rgba(15, 23, 42, 0.07), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+  --shadow-lg: 0 12px 30px -4px rgba(15, 23, 42, 0.10), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+  --glow-primary: 0 0 24px rgba(26, 64, 255, 0.22);
 }
 
 [data-theme="dark"],
 .dark {
+  /* Dark Theme (Deep Navy & Vibrant Accents) */
   --bg-page: #05082a;
   --bg-surface: #0a0f3d;
   --bg-card: #0f1548;
   --bg-card-hover: #161d5a;
-  --bg-header: rgba(5, 8, 42, 0.9);
+  --bg-header: rgba(5, 8, 42, 0.90);
   --text-primary: #e8eafc;
   --text-secondary: #a0a6cc;
   --text-muted: #6b72a0;
+  --text-inverse: #ffffff;
   --border-primary: #1e2560;
+
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-  --glow-primary: 0 0 30px rgba(240, 122, 48, 0.2);
+  --shadow-md: 0 4px 18px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 32px rgba(0, 0, 0, 0.55);
+  --glow-primary: 0 0 30px rgba(26, 64, 255, 0.35);
 }
 
 * {
@@ -61,12 +67,12 @@ body {
   color: var(--text-primary);
   user-select: none;
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body::selection {
-  background-color: var(--bg-surface);
-  color: var(--brand-success);
+  background-color: var(--brand-primary);
+  color: #ffffff;
 }
 
 /* Site Header */
@@ -85,12 +91,14 @@ body::selection {
   background-color: var(--bg-header);
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(16px);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .brand {
   flex: 0 0 auto;
   font-size: 1.25rem;
   font-weight: 800;
+  color: var(--text-primary);
 }
 
 .nav-links {
@@ -106,15 +114,17 @@ body::selection {
   border: 1px solid transparent;
   border-radius: 8px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   transition:
     background-color 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .nav-links a:hover {
-  border-color: var(--accent-secondary);
-  background-color: var(--bg-card-hover);
+  border-color: var(--border-primary);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
 }
 
 .nav-actions {
@@ -133,6 +143,7 @@ body::selection {
   color: var(--text-secondary);
   font-size: 1.2rem;
   border: 1px solid var(--border-primary);
+  box-shadow: var(--shadow-sm);
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
@@ -140,23 +151,24 @@ body::selection {
 }
 
 .icon-button:hover {
-  border-color: var(--accent-secondary);
+  border-color: var(--brand-primary);
   background-color: var(--bg-card-hover);
+  color: var(--text-primary);
 }
 
 .menu-toggle {
   display: none;
 }
 
-/* Section styling */
+/* Sections Structure */
 .section {
   width: min(1120px, calc(100% - 32px));
   margin-inline: auto;
-  padding: 48px 0;
+  padding: 56px 0;
 }
 
 .section-header {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .eyebrow,
@@ -173,21 +185,51 @@ body::selection {
   font-size: clamp(1.8rem, 4vw, 2.75rem);
   line-height: 1.15;
   font-weight: 900;
+  color: var(--text-primary);
 }
 
-/* Floating background canvas (Desktop only) */
+/* Floating background canvas */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
 .floating-icons {
   position: absolute;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
+  z-index: 2;
 }
 
-.tech-icon {
+/* Glassmorphism Floating Tech Badge (Works on Light & Dark themes) */
+.tech-icon-badge {
   position: absolute;
-  width: clamp(32px, 4vw, 56px);
-  opacity: 0.35;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.12), 0 2px 6px -1px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(8px);
   will-change: transform;
+  transition: opacity 0.3s ease;
+}
+
+.tech-icon-badge img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+[data-theme="dark"] .tech-icon-badge,
+.dark .tech-icon-badge {
+  background: rgba(15, 21, 72, 0.85);
+  border: 1px solid rgba(30, 37, 96, 0.85);
+  box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.5);
 }
 
 /* Project Cards Grid */
@@ -227,9 +269,8 @@ body::selection {
     gap: 6px;
     padding: 14px 16px;
     border-bottom: 1px solid var(--border-primary);
-    background-color: var(--bg-header);
-    backdrop-filter: blur(20px);
-    box-shadow: var(--shadow-md);
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow-lg);
   }
 
   .nav-links.active {
@@ -239,9 +280,10 @@ body::selection {
   .nav-links a {
     width: 100%;
     padding: 12px 14px;
-    background-color: var(--bg-card);
+    background-color: var(--bg-surface);
     border: 1px solid var(--border-primary);
     border-radius: 8px;
+    color: var(--text-primary);
   }
 
   .section {
