@@ -1,0 +1,38 @@
+export interface Project {
+  id: string;
+  title: string;
+  slug: string;
+  category: string;
+  description: string;
+  short_description?: string | null;
+  technologies: string[];
+  features: string[];
+  status: string;
+  url?: string | null;
+  github_url?: string | null;
+  image_url: string;
+  order_index: number;
+  is_published: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface SocialLink {
+  name: string;
+  url: string;
+  icon: string;
+}
+
+export interface ProfileSettings {
+  id: string;
+  full_name: string;
+  job_title: string;
+  eyebrow: string;
+  hero_headline: string;
+  hero_description: string;
+  about_text: string;
+  profile_image_url: string;
+  resume_url?: string | null;
+  social_links: SocialLink[];
+  updated_at: string;
+}
