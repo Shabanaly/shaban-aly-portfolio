@@ -24,6 +24,7 @@ import {
   Sparkles,
   Loader2,
   FileText,
+  Quote,
 } from "lucide-react";
 
 interface Props {
@@ -433,6 +434,58 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                   accept=".pdf,.doc,.docx"
                   className="text-xs text-[var(--text-secondary)] file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-bold file:bg-[var(--bg-card)] file:text-[var(--text-primary)] hover:file:bg-[var(--bg-card-hover)] cursor-pointer"
                 />
+              </div>
+            </div>
+
+            {/* Testimonial / Recommendation or Philosophy Card */}
+            <div className="p-4 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] space-y-3">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">
+                <Quote className="w-4 h-4 text-[var(--brand-primary)]" />
+                <span>Footer Recommendation / Work Philosophy Card</span>
+              </div>
+              <p className="text-xs text-[var(--text-muted)]">
+                Customize the quote shown in the footer. You can write a recommendation from a client, or your personal work philosophy.
+              </p>
+
+              <div>
+                <label className="block text-xs font-bold text-[var(--text-secondary)] mb-1">
+                  Quote / Statement Text
+                </label>
+                <textarea
+                  name="testimonial_quote"
+                  rows={3}
+                  defaultValue={initialProfile.testimonial?.quote || ""}
+                  placeholder="e.g. Shaban is a dedicated frontend developer..."
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-card)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-bold text-[var(--text-secondary)] mb-1">
+                    Author / Heading Name
+                  </label>
+                  <input
+                    type="text"
+                    name="testimonial_author"
+                    defaultValue={initialProfile.testimonial?.author || ""}
+                    placeholder="e.g. Eng. Ahmed Hassan or Client Name"
+                    className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-card)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-[var(--text-secondary)] mb-1">
+                    Role / Company
+                  </label>
+                  <input
+                    type="text"
+                    name="testimonial_role"
+                    defaultValue={initialProfile.testimonial?.role || ""}
+                    placeholder="e.g. Senior Engineering Lead or Startup Founder"
+                    className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-card)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                  />
+                </div>
               </div>
             </div>
 

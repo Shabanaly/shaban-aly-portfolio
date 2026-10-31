@@ -281,6 +281,18 @@ export async function updateProfileSettingsAction(formData: FormData) {
     }
   }
 
+  const testimonial_quote = (formData.get("testimonial_quote") as string)?.trim();
+  const testimonial_author = (formData.get("testimonial_author") as string)?.trim();
+  const testimonial_role = (formData.get("testimonial_role") as string)?.trim();
+
+  const testimonial = testimonial_quote
+    ? {
+        quote: testimonial_quote,
+        author: testimonial_author || "Client Recommendation",
+        role: testimonial_role || "Engineering Lead",
+      }
+    : null;
+
   const { error } = await supabase
     .from("profile_settings")
     .update({
@@ -292,6 +304,7 @@ export async function updateProfileSettingsAction(formData: FormData) {
       about_text,
       profile_image_url,
       resume_url,
+      testimonial,
       updated_at: new Date().toISOString(),
     })
     .neq("id", "00000000-0000-0000-0000-000000000000");

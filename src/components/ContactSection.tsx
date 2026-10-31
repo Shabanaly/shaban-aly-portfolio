@@ -37,9 +37,9 @@ function getBrandIcon(name: string) {
 export function ContactSection({ profile }: ContactSectionProps) {
   const testimonial = profile.testimonial || {
     quote:
-      "Shaban is a dedicated frontend developer who delivers high-quality work on time. His attention to detail, responsive design skills, and clean architecture make him a great asset to any team.",
-    author: "Eng. Ahmed Hassan",
-    role: "Senior Engineering Lead",
+      "Dedicated to building clean, scalable, and responsive web applications with high performance and seamless user experiences.",
+    author: "Work Philosophy",
+    role: "Engineering Standards",
   };
 
   // Only take social profiles (exclude email/phone since they are listed as contact rows below)

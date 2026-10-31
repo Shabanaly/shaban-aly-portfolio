@@ -69,9 +69,9 @@ alter table public.profile_settings add column if not exists skills jsonb defaul
 ]'::jsonb;
 
 alter table public.profile_settings add column if not exists testimonial jsonb default '{
-  "quote": "Shaban is a dedicated frontend developer who delivers high-quality work on time. His attention to detail, responsive design skills, and clean architecture make him a great asset to any team.",
-  "author": "Eng. Ahmed Hassan",
-  "role": "Senior Engineering Lead"
+  "quote": "Dedicated to building clean, scalable, and responsive web applications with high performance and seamless user experiences.",
+  "author": "Work Philosophy",
+  "role": "Engineering Standards"
 }'::jsonb;
 
 -- تحديث الحقول الفارغة في الصف الحالي إذا تم إنشاؤه مسبقاً قبل الترقية
@@ -95,9 +95,9 @@ set
     {"name": "Supabase & PostgreSQL", "percentage": 80, "icon": "supabase"}
   ]'::jsonb),
   testimonial = coalesce(testimonial, '{
-    "quote": "Shaban is a dedicated frontend developer who delivers high-quality work on time. His attention to detail, responsive design skills, and clean architecture make him a great asset to any team.",
-    "author": "Eng. Ahmed Hassan",
-    "role": "Senior Engineering Lead"
+    "quote": "Dedicated to building clean, scalable, and responsive web applications with high performance and seamless user experiences.",
+    "author": "Work Philosophy",
+    "role": "Engineering Standards"
   }'::jsonb),
   resume_url = coalesce(resume_url, '/resume.pdf')
 where true;

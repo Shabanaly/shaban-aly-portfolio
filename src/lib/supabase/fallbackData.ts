@@ -142,9 +142,9 @@ export const fallbackProfile: ProfileSettings = {
   ],
   testimonial: {
     quote:
-      "Shaban is a dedicated developer who delivers high-quality work on time. His attention to detail, responsive design skills, and problem-solving mindset make him a great asset to any project.",
-    author: "Eng. Ahmed Hassan",
-    role: "Senior Engineering Lead",
+      "Dedicated to building clean, scalable, and responsive web applications with high performance and seamless user experiences.",
+    author: "Work Philosophy",
+    role: "Engineering Standards",
   },
   social_links: [
     {
