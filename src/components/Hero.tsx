@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ProfileSettings } from "@/types";
@@ -20,123 +19,19 @@ const techIcons = [
   { name: "Vue.js", file: "vuejs.png" },
 ];
 
-const floatingIconFiles = [
-  "javascript.png",
-  "typescript.png",
-  "react.png",
-  "nextjs.png",
-  "node.png",
-  "redux.png",
-];
-
 export function Hero({ profile }: HeroProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const heroRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    // Only animate floating icons on desktop screens (>= 768px)
-    if (typeof window === "undefined" || window.innerWidth < 768) {
-      return;
-    }
-
-    const hero = heroRef.current;
-    const container = containerRef.current;
-    if (!hero || !container) return;
-
-    let animationFrameId: number;
-    let isCleanedUp = false;
-
-    const elements: Array<{
-      element: HTMLElement;
-      x: number;
-      y: number;
-      dx: number;
-      dy: number;
-    }> = [];
-
-    container.innerHTML = "";
-
-    floatingIconFiles.forEach((iconName) => {
-      // Create a glassmorphic badge container for every floating icon
-      const badge = document.createElement("div");
-      badge.classList.add("tech-icon-badge");
-
-      const img = document.createElement("img");
-      img.src = `/assets/IconsFrameWorkes/${iconName}`;
-      img.alt = iconName.split(".")[0];
-      badge.appendChild(img);
-      container.appendChild(badge);
-
-      const heroW = hero.clientWidth || 1000;
-      const heroH = hero.clientHeight || 650;
-
-      elements.push({
-        element: badge,
-        x: Math.random() * (heroW - 140) + 30,
-        y: Math.random() * (heroH - 240) + 60,
-        dx: (Math.random() - 0.5) * 0.9,
-        dy: (Math.random() - 0.5) * 0.9,
-      });
-    });
-
-    const animate = () => {
-      if (isCleanedUp) return;
-
-      const heroWidth = hero.clientWidth;
-      const heroHeight = hero.clientHeight;
-      const minY = 50;
-      const maxY = Math.min(heroHeight - 120, 620); // Strict lower bound to never escape hero
-
-      elements.forEach((item) => {
-        const size = item.element.offsetWidth || 48;
-
-        item.x += item.dx;
-        item.y += item.dy;
-
-        // Bounce horizontally
-        if (item.x <= 20 || item.x >= heroWidth - size - 20) {
-          item.dx *= -1;
-        }
-
-        // Bounce vertically inside strictly bounded hero atmosphere
-        if (item.y <= minY || item.y >= maxY - size) {
-          item.dy *= -1;
-        }
-
-        item.element.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
-      });
-
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-
-    return () => {
-      isCleanedUp = true;
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
   return (
     <section
-      className="hero section pt-28 pb-12 sm:pt-32 sm:pb-20 relative overflow-hidden"
+      className="hero section pt-28 sm:pt-36 pb-12 sm:pb-20 relative overflow-hidden"
       id="home"
-      ref={heroRef}
     >
-      {/* Background Floating Glass Badges: Clearly visible & strictly bounded */}
-      <div
-        className="floating-icons hidden md:block"
-        aria-hidden="true"
-        ref={containerRef}
-      />
-
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Main Content Column */}
         <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
           {/* Eyebrow Tag */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-(--brand-primary)/10 border border-(--brand-primary)/20 text-(--brand-primary) text-xs font-extrabold uppercase tracking-wider">
             <span className="w-2 h-2 rounded-full bg-(--brand-primary) animate-pulse" />
-            <span>{profile.eyebrow || "I'M A WEB DEVELOPER"}</span>
+            <span>{profile.eyebrow || "FRONTEND DEVELOPER"}</span>
           </div>
 
           {/* Main Headline */}
