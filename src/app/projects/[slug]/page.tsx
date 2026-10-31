@@ -98,7 +98,7 @@ export default async function ProjectDetailsPage({ params }: Props) {
                   <ul className="feature-list">
                     {project.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-secondary)]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-(--accent-secondary)" />
                         <span>{feature}</span>
                       </li>
                     ))}

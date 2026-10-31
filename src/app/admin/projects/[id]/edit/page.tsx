@@ -19,7 +19,7 @@ export default async function EditProjectPage({ params }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)]">
+    <div className="min-h-screen bg-(--bg-page) text-(--text-primary)">
       <AdminHeader />
       <ProjectForm project={project} />
     </div>

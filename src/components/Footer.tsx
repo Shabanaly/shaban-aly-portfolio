@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="w-full py-6 px-4 border-t border-[var(--border-primary)] bg-[var(--bg-header)] backdrop-blur text-xs text-[var(--text-secondary)]">
+    <footer className="w-full py-6 px-4 border-t border-(--border-primary) bg-(--bg-header) backdrop-blur text-xs text-(--text-secondary)">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
         <p>&copy; {new Date().getFullYear()} Shaban Aly. All rights reserved.</p>
         <p className="flex items-center gap-1">

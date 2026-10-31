@@ -9,7 +9,7 @@ export default async function AdminDashboardPage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-primary)]">
+    <div className="min-h-screen bg-(--bg-page) text-(--text-primary)">
       <AdminHeader />
       <main className="max-w-6xl mx-auto px-4 py-8">
         <DashboardClient initialProjects={projects} initialProfile={profile} />

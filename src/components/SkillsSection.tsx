@@ -34,21 +34,21 @@ export function SkillsSection({ profile }: SkillsSectionProps) {
         {skills.map((skill) => (
           <div
             key={skill.name}
-            className="p-4 sm:p-5 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] hover:border-[var(--brand-primary)]/40 hover:-translate-y-0.5 transition-all"
+            className="p-4 sm:p-5 rounded-xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) hover:border-(--brand-primary)/40 hover:-translate-y-0.5 transition-all"
           >
             <div className="flex items-center justify-between mb-2">
-              <span className="font-extrabold text-sm text-[var(--text-primary)]">
+              <span className="font-extrabold text-sm text-(--text-primary)">
                 {skill.name}
               </span>
-              <span className="font-mono text-xs font-bold text-[var(--text-muted)]">
+              <span className="font-mono text-xs font-bold text-(--text-muted)">
                 {skill.percentage}%
               </span>
             </div>
 
             {/* Progress Bar Track */}
-            <div className="w-full h-2 rounded-full bg-[var(--bg-surface)] border border-[var(--border-primary)]/40 overflow-hidden">
+            <div className="w-full h-2 rounded-full bg-(--bg-surface) border border-(--border-primary)/40 overflow-hidden">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-secondary)] transition-all duration-1000 ease-out"
+                className="h-full rounded-full bg-gradient-to-r from-(--brand-primary) to-(--brand-secondary) transition-all duration-1000 ease-out"
                 style={{ width: `${skill.percentage}%` }}
               />
             </div>

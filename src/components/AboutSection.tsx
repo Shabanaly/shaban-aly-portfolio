@@ -43,18 +43,18 @@ export function AboutSection({ profile }: AboutSectionProps) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Left Bio Column */}
         <div className="lg:col-span-6 space-y-4 sm:space-y-5 text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--brand-primary)]/10 border border-[var(--brand-primary)]/20 text-[var(--brand-primary)] text-xs font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-(--brand-primary)/10 border border-(--brand-primary)/20 text-(--brand-primary) text-xs font-bold uppercase tracking-wider">
             <span>ABOUT ME</span>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl font-black text-[var(--text-primary)] leading-tight">
+          <h2 className="text-2xl sm:text-4xl font-black text-(--text-primary) leading-tight">
             I&apos;m passionate about creating{" "}
-            <span className="text-[var(--brand-primary)]">
+            <span className="text-(--brand-primary)">
               digital solutions
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
+          <p className="text-sm sm:text-base text-(--text-secondary) leading-relaxed">
             {profile.about_text ||
               "I am a motivated software developer with a strong passion for creating user-friendly web applications. I enjoy working with modern frontend tools, improving interfaces, and turning ideas into practical products that feel simple to use."}
           </p>
@@ -62,9 +62,9 @@ export function AboutSection({ profile }: AboutSectionProps) {
           <div className="pt-2">
             <Link
               href="#contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-card)] text-[var(--text-primary)] font-bold text-sm hover:border-[var(--brand-primary)] hover:bg-[var(--bg-card-hover)] transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-(--border-primary) bg-(--bg-card) text-(--text-primary) font-bold text-sm hover:border-(--brand-primary) hover:bg-(--bg-card-hover) transition-all"
             >
-              <User className="w-4 h-4 text-[var(--brand-primary)]" />
+              <User className="w-4 h-4 text-(--brand-primary)" />
               <span>Get In Touch With Me</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -76,17 +76,17 @@ export function AboutSection({ profile }: AboutSectionProps) {
           {stats.map((stat, idx) => (
             <div
               key={idx}
-              className="p-4 sm:p-6 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] hover:border-[var(--brand-primary)]/40 hover:-translate-y-1 transition-all flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4"
+              className="p-4 sm:p-6 rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) hover:border-(--brand-primary)/40 hover:-translate-y-1 transition-all flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-primary)] flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-(--bg-surface) border border-(--border-primary) flex items-center justify-center flex-shrink-0">
                 {getStatIcon(stat.icon)}
               </div>
 
               <div>
-                <p className="text-xl sm:text-3xl font-black text-[var(--text-primary)] font-mono">
+                <p className="text-xl sm:text-3xl font-black text-(--text-primary) font-mono">
                   {stat.value}
                 </p>
-                <p className="text-[11px] sm:text-sm text-[var(--text-secondary)] font-medium mt-1 leading-snug">
+                <p className="text-[11px] sm:text-sm text-(--text-secondary) font-medium mt-1 leading-snug">
                   {stat.label}
                 </p>
               </div>

@@ -24,23 +24,23 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-[var(--bg-page)] text-[var(--text-primary)]">
-      <div className="w-full max-w-md p-8 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-lg)]">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-(--bg-page) text-(--text-primary)">
+      <div className="w-full max-w-md p-8 rounded-xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-lg)">
         <div className="flex items-center justify-between mb-8">
           <Link
             href="/"
-            className="flex items-center gap-1.5 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+            className="flex items-center gap-1.5 text-sm text-(--text-secondary) hover:text-(--text-primary) transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to site</span>
           </Link>
-          <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-[var(--brand-primary)]">
+          <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-(--brand-primary)">
             <Shield className="w-5 h-5" />
           </div>
         </div>
 
         <h1 className="text-2xl font-black mb-2">Admin Dashboard</h1>
-        <p className="text-sm text-[var(--text-secondary)] mb-6">
+        <p className="text-sm text-(--text-secondary) mb-6">
           Sign in to manage projects, content, and portfolio settings.
         </p>
 
@@ -52,7 +52,7 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-(--text-secondary) mb-1">
               Email Address
             </label>
             <input
@@ -60,12 +60,12 @@ export default function AdminLoginPage() {
               name="email"
               required
               placeholder="admin@example.com"
-              className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] text-sm"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-(--border-primary) bg-(--bg-surface) text-(--text-primary) focus:outline-none focus:ring-2 focus:ring-(--brand-primary) text-sm"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-1">
+            <label className="block text-xs font-bold uppercase tracking-wider text-(--text-secondary) mb-1">
               Password
             </label>
             <input
@@ -73,14 +73,14 @@ export default function AdminLoginPage() {
               name="password"
               required
               placeholder="••••••••"
-              className="w-full px-3.5 py-2.5 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] text-sm"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-(--border-primary) bg-(--bg-surface) text-(--text-primary) focus:outline-none focus:ring-2 focus:ring-(--brand-primary) text-sm"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-4 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-bold text-white bg-[var(--brand-primary)] hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="w-full mt-4 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-bold text-white bg-(--brand-primary) hover:opacity-90 transition-opacity disabled:opacity-50"
           >
             {loading ? (
               <>

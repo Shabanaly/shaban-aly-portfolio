@@ -100,21 +100,21 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
     <div className="space-y-6">
       {/* Top Stats Overview */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex items-center justify-between">
+        <div className="p-4 rounded-xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) flex items-center justify-between">
           <div>
-            <p className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">
+            <p className="text-xs font-bold text-(--text-muted) uppercase tracking-wider">
               Total Projects
             </p>
             <p className="text-2xl font-black mt-1">{totalCount}</p>
           </div>
-          <div className="w-10 h-10 rounded-lg bg-blue-500/10 text-[var(--brand-primary)] flex items-center justify-center">
+          <div className="w-10 h-10 rounded-lg bg-blue-500/10 text-(--brand-primary) flex items-center justify-center">
             <Layers className="w-5 h-5" />
           </div>
         </div>
 
-        <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex items-center justify-between">
+        <div className="p-4 rounded-xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) flex items-center justify-between">
           <div>
-            <p className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">
+            <p className="text-xs font-bold text-(--text-muted) uppercase tracking-wider">
               Live &amp; Published
             </p>
             <p className="text-2xl font-black text-emerald-500 mt-1">
@@ -126,9 +126,9 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
           </div>
         </div>
 
-        <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex items-center justify-between">
+        <div className="p-4 rounded-xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) flex items-center justify-between">
           <div>
-            <p className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">
+            <p className="text-xs font-bold text-(--text-muted) uppercase tracking-wider">
               In Progress
             </p>
             <p className="text-2xl font-black text-amber-500 mt-1">
@@ -142,13 +142,13 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
       </div>
 
       {/* Tabs navigation */}
-      <div className="flex border-b border-[var(--border-primary)] gap-4">
+      <div className="flex border-b border-(--border-primary) gap-4">
         <button
           onClick={() => setActiveTab("projects")}
           className={`flex items-center gap-2 pb-3 px-2 text-sm font-bold border-b-2 transition-colors ${
             activeTab === "projects"
-              ? "border-[var(--brand-primary)] text-[var(--brand-primary)]"
-              : "border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+              ? "border-(--brand-primary) text-(--brand-primary)"
+              : "border-transparent text-(--text-secondary) hover:text-(--text-primary)"
           }`}
         >
           <Layers className="w-4 h-4" />
@@ -159,8 +159,8 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
           onClick={() => setActiveTab("profile")}
           className={`flex items-center gap-2 pb-3 px-2 text-sm font-bold border-b-2 transition-colors ${
             activeTab === "profile"
-              ? "border-[var(--brand-primary)] text-[var(--brand-primary)]"
-              : "border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+              ? "border-(--brand-primary) text-(--brand-primary)"
+              : "border-transparent text-(--text-secondary) hover:text-(--text-primary)"
           }`}
         >
           <User className="w-4 h-4" />
@@ -173,29 +173,29 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
             <div className="relative flex-1 max-w-md">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
+              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-(--text-muted)" />
               <input
                 type="text"
                 placeholder="Search projects by name, category, tech..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                className="w-full pl-9 pr-4 py-2 rounded-lg border border-(--border-primary) bg-(--bg-surface) text-sm focus:outline-none focus:ring-2 focus:ring-(--brand-primary)"
               />
             </div>
 
             <Link
               href="/admin/projects/new"
-              className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[var(--brand-primary)] text-white text-sm font-bold hover:opacity-90 transition-opacity"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-(--brand-primary) text-white text-sm font-bold hover:opacity-90 transition-opacity"
             >
               <Plus className="w-4 h-4" />
               <span>Add New Project</span>
             </Link>
           </div>
 
-          <div className="border border-[var(--border-primary)] rounded-xl bg-[var(--bg-card)] overflow-hidden shadow-[var(--shadow-sm)]">
+          <div className="border border-(--border-primary) rounded-xl bg-(--bg-card) overflow-hidden shadow-(--shadow-sm)">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="bg-[var(--bg-surface)] border-b border-[var(--border-primary)] text-xs text-[var(--text-muted)] uppercase tracking-wider">
+                <thead className="bg-(--bg-surface) border-b border-(--border-primary) text-xs text-(--text-muted) uppercase tracking-wider">
                   <tr>
                     <th className="py-3 px-4">Project</th>
                     <th className="py-3 px-4">Category</th>
@@ -205,18 +205,18 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                     <th className="py-3 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[var(--border-primary)]">
+                <tbody className="divide-y divide-(--border-primary)">
                   {filteredProjects.map((p, idx) => (
                     <tr
                       key={p.id}
-                      className="hover:bg-[var(--bg-surface)]/60 transition-colors"
+                      className="hover:bg-(--bg-surface)/60 transition-colors"
                     >
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-3">
-                          <span className="font-mono text-xs font-bold text-[var(--text-muted)]">
+                          <span className="font-mono text-xs font-bold text-(--text-muted)">
                             {String(idx + 1).padStart(2, "0")}
                           </span>
-                          <div className="w-12 h-9 rounded overflow-hidden relative border border-[var(--border-primary)] flex-shrink-0 bg-neutral-200 dark:bg-neutral-800">
+                          <div className="w-12 h-9 rounded overflow-hidden relative border border-(--border-primary) flex-shrink-0 bg-neutral-200 dark:bg-neutral-800">
                             <Image
                               src={p.image_url}
                               alt={p.title}
@@ -225,17 +225,17 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                             />
                           </div>
                           <div>
-                            <div className="font-bold text-[var(--text-primary)]">
+                            <div className="font-bold text-(--text-primary)">
                               {p.title}
                             </div>
-                            <div className="text-xs text-[var(--text-muted)]">
+                            <div className="text-xs text-(--text-muted)">
                               /{p.slug}
                             </div>
                           </div>
                         </div>
                       </td>
 
-                      <td className="py-3 px-4 text-[var(--text-secondary)]">
+                      <td className="py-3 px-4 text-(--text-secondary)">
                         {p.category}
                       </td>
 
@@ -284,7 +284,7 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                           <Link
                             href={`/projects/${p.slug}`}
                             target="_blank"
-                            className="p-1.5 rounded-lg border border-[var(--border-primary)] hover:bg-[var(--bg-card-hover)] text-[var(--text-secondary)]"
+                            className="p-1.5 rounded-lg border border-(--border-primary) hover:bg-(--bg-card-hover) text-(--text-secondary)"
                             title="Preview details page"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
@@ -292,7 +292,7 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
 
                           <Link
                             href={`/admin/projects/${p.id}/edit`}
-                            className="p-1.5 rounded-lg border border-[var(--border-primary)] hover:bg-[var(--bg-card-hover)] text-blue-500"
+                            className="p-1.5 rounded-lg border border-(--border-primary) hover:bg-(--bg-card-hover) text-blue-500"
                             title="Edit project"
                           >
                             <Edit2 className="w-3.5 h-3.5" />
@@ -315,7 +315,7 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                     <tr>
                       <td
                         colSpan={6}
-                        className="py-8 text-center text-[var(--text-muted)]"
+                        className="py-8 text-center text-(--text-muted)"
                       >
                         No projects match your filter.
                       </td>
@@ -330,12 +330,12 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
 
       {/* Profile Settings Tab */}
       {activeTab === "profile" && (
-        <div className="p-6 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] max-w-2xl">
+        <div className="p-6 rounded-xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) max-w-2xl">
           <h2 className="text-lg font-bold mb-1 flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-[var(--accent-secondary)]" />
+            <Sparkles className="w-5 h-5 text-(--accent-secondary)" />
             <span>Edit Profile, Resume &amp; Bio</span>
           </h2>
-          <p className="text-xs text-[var(--text-secondary)] mb-6">
+          <p className="text-xs text-(--text-secondary) mb-6">
             Changes made here update the homepage hero section, resume link, and about text immediately.
           </p>
 
@@ -349,7 +349,7 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
           <form onSubmit={handleProfileSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-(--text-secondary) mb-1">
                   Full Name
                 </label>
                 <input
@@ -357,12 +357,12 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                   name="full_name"
                   defaultValue={initialProfile.full_name}
                   required
-                  className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                  className="w-full px-3 py-2 rounded-lg border border-(--border-primary) bg-(--bg-surface) text-sm focus:outline-none focus:ring-2 focus:ring-(--brand-primary)"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-(--text-secondary) mb-1">
                   Job Title / Eyebrow
                 </label>
                 <input
@@ -370,13 +370,13 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                   name="eyebrow"
                   defaultValue={initialProfile.eyebrow}
                   required
-                  className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                  className="w-full px-3 py-2 rounded-lg border border-(--border-primary) bg-(--bg-surface) text-sm focus:outline-none focus:ring-2 focus:ring-(--brand-primary)"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-(--text-secondary) mb-1">
                 Hero Headline
               </label>
               <input
@@ -384,71 +384,71 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                 name="hero_headline"
                 defaultValue={initialProfile.hero_headline}
                 required
-                className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                className="w-full px-3 py-2 rounded-lg border border-(--border-primary) bg-(--bg-surface) text-sm focus:outline-none focus:ring-2 focus:ring-(--brand-primary)"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-(--text-secondary) mb-1">
                 Hero Description
               </label>
               <textarea
                 name="hero_description"
                 rows={3}
                 defaultValue={initialProfile.hero_description}
-                className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                className="w-full px-3 py-2 rounded-lg border border-(--border-primary) bg-(--bg-surface) text-sm focus:outline-none focus:ring-2 focus:ring-(--brand-primary)"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-(--text-secondary) mb-1">
                 About Me Bio
               </label>
               <textarea
                 name="about_text"
                 rows={4}
                 defaultValue={initialProfile.about_text}
-                className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                className="w-full px-3 py-2 rounded-lg border border-(--border-primary) bg-(--bg-surface) text-sm focus:outline-none focus:ring-2 focus:ring-(--brand-primary)"
               />
             </div>
 
             {/* Resume / CV file link */}
-            <div className="p-4 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] space-y-2">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">
-                <FileText className="w-4 h-4 text-[var(--brand-primary)]" />
+            <div className="p-4 rounded-lg border border-(--border-primary) bg-(--bg-surface) space-y-2">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-(--text-primary)">
+                <FileText className="w-4 h-4 text-(--brand-primary)" />
                 <span>Resume / CV Document</span>
               </div>
               <div>
-                <label className="block text-xs text-[var(--text-secondary)] mb-1">
+                <label className="block text-xs text-(--text-secondary) mb-1">
                   Resume URL or File Path:
                 </label>
                 <input
                   type="text"
                   name="resume_url"
                   defaultValue={initialProfile.resume_url || "/resume.pdf"}
-                  className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-card)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] mb-2"
+                  className="w-full px-3 py-2 rounded-lg border border-(--border-primary) bg-(--bg-card) text-sm focus:outline-none focus:ring-2 focus:ring-(--brand-primary) mb-2"
                 />
                 <input
                   type="file"
                   name="resume_file"
                   accept=".pdf,.doc,.docx"
-                  className="text-xs text-[var(--text-secondary)] file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-bold file:bg-[var(--bg-card)] file:text-[var(--text-primary)] hover:file:bg-[var(--bg-card-hover)] cursor-pointer"
+                  className="text-xs text-(--text-secondary) file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-bold file:bg-(--bg-card) file:text-(--text-primary) hover:file:bg-(--bg-card-hover) cursor-pointer"
                 />
               </div>
             </div>
 
             {/* Testimonial / Recommendation or Philosophy Card */}
-            <div className="p-4 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] space-y-3">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">
-                <Quote className="w-4 h-4 text-[var(--brand-primary)]" />
+            <div className="p-4 rounded-lg border border-(--border-primary) bg-(--bg-surface) space-y-3">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-(--text-primary)">
+                <Quote className="w-4 h-4 text-(--brand-primary)" />
                 <span>Footer Recommendation / Work Philosophy Card</span>
               </div>
-              <p className="text-xs text-[var(--text-muted)]">
+              <p className="text-xs text-(--text-muted)">
                 Customize the quote shown in the footer. You can write a recommendation from a client, or your personal work philosophy.
               </p>
 
               <div>
-                <label className="block text-xs font-bold text-[var(--text-secondary)] mb-1">
+                <label className="block text-xs font-bold text-(--text-secondary) mb-1">
                   Quote / Statement Text
                 </label>
                 <textarea
@@ -456,13 +456,13 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                   rows={3}
                   defaultValue={initialProfile.testimonial?.quote || ""}
                   placeholder="e.g. Shaban is a dedicated frontend developer..."
-                  className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-card)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                  className="w-full px-3 py-2 rounded-lg border border-(--border-primary) bg-(--bg-card) text-sm focus:outline-none focus:ring-2 focus:ring-(--brand-primary)"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[var(--text-secondary)] mb-1">
+                  <label className="block text-xs font-bold text-(--text-secondary) mb-1">
                     Author / Heading Name
                   </label>
                   <input
@@ -470,12 +470,12 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                     name="testimonial_author"
                     defaultValue={initialProfile.testimonial?.author || ""}
                     placeholder="e.g. Eng. Ahmed Hassan or Client Name"
-                    className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-card)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                    className="w-full px-3 py-2 rounded-lg border border-(--border-primary) bg-(--bg-card) text-sm focus:outline-none focus:ring-2 focus:ring-(--brand-primary)"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[var(--text-secondary)] mb-1">
+                  <label className="block text-xs font-bold text-(--text-secondary) mb-1">
                     Role / Company
                   </label>
                   <input
@@ -483,34 +483,34 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                     name="testimonial_role"
                     defaultValue={initialProfile.testimonial?.role || ""}
                     placeholder="e.g. Senior Engineering Lead or Startup Founder"
-                    className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-card)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
+                    className="w-full px-3 py-2 rounded-lg border border-(--border-primary) bg-(--bg-card) text-sm focus:outline-none focus:ring-2 focus:ring-(--brand-primary)"
                   />
                 </div>
               </div>
             </div>
 
             <div className="pt-2">
-              <label className="block text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-1">
+              <label className="block text-xs font-bold uppercase tracking-wider text-(--text-secondary) mb-1">
                 Profile Image URL (or upload below)
               </label>
               <input
                 type="text"
                 name="profile_image_url"
                 defaultValue={initialProfile.profile_image_url}
-                className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] mb-2"
+                className="w-full px-3 py-2 rounded-lg border border-(--border-primary) bg-(--bg-surface) text-sm focus:outline-none focus:ring-2 focus:ring-(--brand-primary) mb-2"
               />
               <input
                 type="file"
                 name="profile_image_file"
                 accept="image/*"
-                className="text-xs text-[var(--text-secondary)] file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-bold file:bg-[var(--bg-surface)] file:text-[var(--text-primary)] hover:file:bg-[var(--bg-card-hover)] cursor-pointer"
+                className="text-xs text-(--text-secondary) file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-bold file:bg-(--bg-surface) file:text-(--text-primary) hover:file:bg-(--bg-card-hover) cursor-pointer"
               />
             </div>
 
             <button
               type="submit"
               disabled={profileSaving}
-              className="mt-4 flex items-center justify-center gap-2 py-2.5 px-6 rounded-lg font-bold text-white bg-[var(--brand-primary)] hover:opacity-90 transition-opacity disabled:opacity-50"
+              className="mt-4 flex items-center justify-center gap-2 py-2.5 px-6 rounded-lg font-bold text-white bg-(--brand-primary) hover:opacity-90 transition-opacity disabled:opacity-50"
             >
               {profileSaving ? (
                 <>

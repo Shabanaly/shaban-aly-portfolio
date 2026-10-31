@@ -134,26 +134,26 @@ export function Hero({ profile }: HeroProps) {
         {/* Main Content Column */}
         <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
           {/* Eyebrow Tag */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--brand-primary)]/10 border border-[var(--brand-primary)]/20 text-[var(--brand-primary)] text-xs font-extrabold uppercase tracking-wider">
-            <span className="w-2 h-2 rounded-full bg-[var(--brand-primary)] animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-(--brand-primary)/10 border border-(--brand-primary)/20 text-(--brand-primary) text-xs font-extrabold uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-(--brand-primary) animate-pulse" />
             <span>{profile.eyebrow || "I'M A WEB DEVELOPER"}</span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] text-[var(--text-primary)]">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] text-(--text-primary)">
             Hi, I&apos;m{" "}
-            <span className="text-[var(--brand-primary)] font-extrabold">
+            <span className="text-(--brand-primary) font-extrabold">
               {profile.full_name}
             </span>
             <br />
-            <span className="text-slate-800 dark:text-[var(--text-primary)]/80 font-bold text-2xl sm:text-4xl lg:text-5xl block mt-2">
+            <span className="text-slate-800 dark:text-(--text-primary)/80 font-bold text-2xl sm:text-4xl lg:text-5xl block mt-2">
               I build things for the web.
             </span>
           </h1>
 
           {/* Mobile Profile Photo (Shows right after title on mobile only) */}
           <div className="block lg:hidden my-6">
-            <div className="relative w-44 h-44 sm:w-56 sm:h-56 mx-auto rounded-full p-2 border-4 border-white dark:border-[var(--brand-primary)]/40 bg-white dark:bg-[var(--bg-card)] shadow-xl overflow-hidden">
+            <div className="relative w-44 h-44 sm:w-56 sm:h-56 mx-auto rounded-full p-2 border-4 border-white dark:border-(--brand-primary)/40 bg-white dark:bg-(--bg-card) shadow-xl overflow-hidden">
               <Image
                 src={profile.profile_image_url || "/assets/images/me/me.png"}
                 alt={profile.full_name}
@@ -165,7 +165,7 @@ export function Hero({ profile }: HeroProps) {
           </div>
 
           {/* Bio Description */}
-          <p className="text-sm sm:text-base lg:text-lg text-[var(--text-secondary)] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base lg:text-lg text-(--text-secondary) max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
             {profile.hero_description ||
               "I'm a passionate web developer specializing in building exceptional digital experiences with modern technologies."}
           </p>
@@ -174,7 +174,7 @@ export function Hero({ profile }: HeroProps) {
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
             <Link
               href="#projects"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[var(--brand-primary)] text-white font-extrabold text-sm hover:opacity-95 shadow-md hover:shadow-[var(--glow-primary)] hover:-translate-y-0.5 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-(--brand-primary) text-white font-extrabold text-sm hover:opacity-95 shadow-md hover:shadow-(--glow-primary) hover:-translate-y-0.5 transition-all"
             >
               <span>View My Work</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -184,23 +184,23 @@ export function Hero({ profile }: HeroProps) {
               href={profile.resume_url || "/resume.pdf"}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border-primary)] text-[var(--text-primary)] font-extrabold text-sm hover:border-[var(--brand-primary)] hover:bg-[var(--bg-card-hover)] hover:-translate-y-0.5 shadow-sm transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-(--bg-card) border border-(--border-primary) text-(--text-primary) font-extrabold text-sm hover:border-(--brand-primary) hover:bg-(--bg-card-hover) hover:-translate-y-0.5 shadow-sm transition-all"
             >
-              <Download className="w-4 h-4 text-[var(--brand-primary)]" />
+              <Download className="w-4 h-4 text-(--brand-primary)" />
               <span>Download CV</span>
             </a>
           </div>
 
           {/* Technologies Strip */}
-          <div className="pt-6 border-t border-[var(--border-primary)] max-w-lg mx-auto lg:mx-0">
-            <p className="text-xs uppercase tracking-wider font-extrabold text-[var(--text-muted)] mb-3">
+          <div className="pt-6 border-t border-(--border-primary) max-w-lg mx-auto lg:mx-0">
+            <p className="text-xs uppercase tracking-wider font-extrabold text-(--text-muted) mb-3">
               Technologies I Work With
             </p>
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
               {techIcons.map((tech) => (
                 <div
                   key={tech.name}
-                  className="w-10 h-10 rounded-xl p-2 bg-[var(--bg-card)] border border-[var(--border-primary)] shadow-sm flex items-center justify-center hover:-translate-y-1 hover:border-[var(--brand-primary)] transition-all"
+                  className="w-10 h-10 rounded-xl p-2 bg-(--bg-card) border border-(--border-primary) shadow-sm flex items-center justify-center hover:-translate-y-1 hover:border-(--brand-primary) transition-all"
                   title={tech.name}
                 >
                   <img
@@ -217,10 +217,10 @@ export function Hero({ profile }: HeroProps) {
         {/* Desktop Media Column (Photo + Aura + Floating Code Snippet) */}
         <div className="hidden lg:flex lg:col-span-5 relative items-center justify-center">
           {/* Circular Glow Aura */}
-          <div className="absolute w-80 h-80 rounded-full bg-gradient-to-tr from-blue-500/15 to-indigo-500/10 dark:from-[var(--brand-primary)]/20 dark:to-[var(--brand-secondary)]/20 blur-3xl pointer-events-none" />
+          <div className="absolute w-80 h-80 rounded-full bg-gradient-to-tr from-blue-500/15 to-indigo-500/10 dark:from-(--brand-primary)/20 dark:to-(--brand-secondary)/20 blur-3xl pointer-events-none" />
 
           {/* Profile Image with Ring */}
-          <div className="relative w-72 h-72 rounded-full p-2 border-4 border-white dark:border-[var(--brand-primary)]/40 bg-white dark:bg-[var(--bg-card)] shadow-xl dark:shadow-2xl overflow-hidden group">
+          <div className="relative w-72 h-72 rounded-full p-2 border-4 border-white dark:border-(--brand-primary)/40 bg-white dark:bg-(--bg-card) shadow-xl dark:shadow-2xl overflow-hidden group">
             <Image
               src={profile.profile_image_url || "/assets/images/me/me.png"}
               alt={profile.full_name}

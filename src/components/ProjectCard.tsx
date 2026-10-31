@@ -14,21 +14,21 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group relative flex flex-col rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] overflow-hidden shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-lg)] hover:border-[var(--brand-primary)]/40 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
+      className="group relative flex flex-col rounded-2xl border border-(--border-primary) bg-(--bg-card) overflow-hidden shadow-(--shadow-sm) hover:shadow-(--shadow-lg) hover:border-(--brand-primary)/40 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
     >
       {/* Top Index & Arrow Indicator */}
       <div className="flex items-center justify-between px-5 pt-5 pb-3">
-        <span className="font-mono text-sm font-bold text-[var(--text-muted)] group-hover:text-[var(--brand-primary)] transition-colors">
+        <span className="font-mono text-sm font-bold text-(--text-muted) group-hover:text-(--brand-primary) transition-colors">
           {formattedIndex}
         </span>
-        <div className="w-8 h-8 rounded-full bg-[var(--bg-surface)] border border-[var(--border-primary)] flex items-center justify-center text-[var(--text-secondary)] group-hover:bg-[var(--brand-primary)] group-hover:text-white group-hover:border-transparent transition-all duration-300">
+        <div className="w-8 h-8 rounded-full bg-(--bg-surface) border border-(--border-primary) flex items-center justify-center text-(--text-secondary) group-hover:bg-(--brand-primary) group-hover:text-white group-hover:border-transparent transition-all duration-300">
           <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       </div>
 
       {/* Image Preview Container */}
       <div className="px-5 pb-2">
-        <div className="overflow-hidden rounded-xl border border-[var(--border-primary)] aspect-[16/10] relative bg-slate-100 dark:bg-neutral-900/40">
+        <div className="overflow-hidden rounded-xl border border-(--border-primary) aspect-[16/10] relative bg-slate-100 dark:bg-neutral-900/40">
           <Image
             src={project.image_url}
             alt={project.title}
@@ -42,7 +42,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       {/* Content Area */}
       <div className="flex flex-1 flex-col p-5 pt-3 gap-3">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xs uppercase font-extrabold tracking-wider text-[var(--accent-secondary)]">
+          <span className="text-xs uppercase font-extrabold tracking-wider text-(--accent-secondary)">
             {project.category}
           </span>
           <span
@@ -56,27 +56,27 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           </span>
         </div>
 
-        <h3 className="text-xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--brand-primary)] transition-colors">
+        <h3 className="text-xl font-extrabold text-(--text-primary) group-hover:text-(--brand-primary) transition-colors">
           {project.title}
         </h3>
 
-        <p className="text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
+        <p className="text-sm text-(--text-secondary) line-clamp-2 leading-relaxed">
           {project.short_description || project.description}
         </p>
 
         {/* Technologies Badges */}
-        <div className="mt-auto pt-3 border-t border-[var(--border-primary)]">
+        <div className="mt-auto pt-3 border-t border-(--border-primary)">
           <ul className="flex flex-wrap gap-1.5">
             {project.technologies.slice(0, 4).map((tech) => (
               <li
                 key={tech}
-                className="text-xs px-2.5 py-1 rounded-md bg-[var(--bg-surface)] text-[var(--text-secondary)] border border-[var(--border-primary)] font-medium"
+                className="text-xs px-2.5 py-1 rounded-md bg-(--bg-surface) text-(--text-secondary) border border-(--border-primary) font-medium"
               >
                 {tech}
               </li>
             ))}
             {project.technologies.length > 4 && (
-              <li className="text-xs px-2 py-1 rounded-md text-[var(--text-muted)] font-mono">
+              <li className="text-xs px-2 py-1 rounded-md text-(--text-muted) font-mono">
                 +{project.technologies.length - 4}
               </li>
             )}

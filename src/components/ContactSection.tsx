@@ -60,15 +60,15 @@ export function ContactSection({ profile }: ContactSectionProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Column 1: Have a Project in Mind CTA */}
-        <div className="p-6 sm:p-7 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex flex-col justify-between space-y-6">
+        <div className="p-6 sm:p-7 rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) flex flex-col justify-between space-y-6">
           <div className="space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent-secondary)]">
+            <span className="text-xs font-bold uppercase tracking-wider text-(--accent-secondary)">
               Let&apos;s Work Together
             </span>
-            <h3 className="text-2xl font-black text-[var(--text-primary)]">
+            <h3 className="text-2xl font-black text-(--text-primary)">
               Have a project in mind?
             </h3>
-            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+            <p className="text-sm text-(--text-secondary) leading-relaxed">
               I&apos;m always open to discussing new projects, frontend development
               opportunities, and technical challenges.
             </p>
@@ -76,7 +76,7 @@ export function ContactSection({ profile }: ContactSectionProps) {
 
           <a
             href="mailto:sa676185@gmail.com"
-            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[var(--brand-primary)] text-white font-extrabold text-sm hover:opacity-90 shadow-md hover:-translate-y-0.5 transition-all"
+            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-(--brand-primary) text-white font-extrabold text-sm hover:opacity-90 shadow-md hover:-translate-y-0.5 transition-all"
           >
             <span>Get In Touch</span>
             <ArrowUpRight className="w-4 h-4" />
@@ -84,25 +84,25 @@ export function ContactSection({ profile }: ContactSectionProps) {
         </div>
 
         {/* Column 2: Testimonial Quote Card */}
-        <div className="p-6 sm:p-7 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex flex-col justify-between space-y-6">
+        <div className="p-6 sm:p-7 rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) flex flex-col justify-between space-y-6">
           <div className="space-y-4">
-            <div className="w-10 h-10 rounded-xl bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-(--brand-primary)/10 text-(--brand-primary) flex items-center justify-center">
               <Quote className="w-5 h-5" />
             </div>
-            <p className="text-sm text-[var(--text-secondary)] italic leading-relaxed">
+            <p className="text-sm text-(--text-secondary) italic leading-relaxed">
               &ldquo;{testimonial.quote}&rdquo;
             </p>
           </div>
 
-          <div className="pt-4 border-t border-[var(--border-primary)]/40 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[var(--brand-primary)] text-white font-black flex items-center justify-center text-sm">
+          <div className="pt-4 border-t border-(--border-primary)/40 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-(--brand-primary) text-white font-black flex items-center justify-center text-sm">
               {testimonial.author.slice(0, 2).toUpperCase()}
             </div>
             <div>
-              <p className="font-extrabold text-sm text-[var(--text-primary)]">
+              <p className="font-extrabold text-sm text-(--text-primary)">
                 {testimonial.author}
               </p>
-              <p className="text-xs text-[var(--text-muted)]">
+              <p className="text-xs text-(--text-muted)">
                 {testimonial.role}
               </p>
             </div>
@@ -110,9 +110,9 @@ export function ContactSection({ profile }: ContactSectionProps) {
         </div>
 
         {/* Column 3: Follow Me & Direct Contact Info */}
-        <div className="p-6 sm:p-7 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex flex-col justify-between space-y-6">
+        <div className="p-6 sm:p-7 rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) flex flex-col justify-between space-y-6">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent-secondary)] block mb-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-(--accent-secondary) block mb-3">
               Follow &amp; Contact Me
             </span>
 
@@ -124,7 +124,7 @@ export function ContactSection({ profile }: ContactSectionProps) {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-primary)] flex items-center justify-center text-[var(--text-secondary)] hover:text-white hover:bg-[var(--brand-primary)] hover:border-transparent transition-all"
+                  className="w-10 h-10 rounded-xl bg-(--bg-surface) border border-(--border-primary) flex items-center justify-center text-(--text-secondary) hover:text-white hover:bg-(--brand-primary) hover:border-transparent transition-all"
                   title={link.name}
                 >
                   {getBrandIcon(link.name)}
@@ -136,23 +136,23 @@ export function ContactSection({ profile }: ContactSectionProps) {
             <div className="space-y-3 pt-2 text-sm">
               <a
                 href="mailto:sa676185@gmail.com"
-                className="flex items-center gap-2.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                className="flex items-center gap-2.5 text-(--text-secondary) hover:text-(--text-primary) transition-colors"
               >
-                <Mail className="w-4 h-4 text-[var(--brand-primary)]" />
+                <Mail className="w-4 h-4 text-(--brand-primary)" />
                 <span>sa676185@gmail.com</span>
               </a>
 
               <a
                 href="tel:+201019979315"
-                className="flex items-center gap-2.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                className="flex items-center gap-2.5 text-(--text-secondary) hover:text-(--text-primary) transition-colors"
               >
-                <Phone className="w-4 h-4 text-[var(--brand-primary)]" />
+                <Phone className="w-4 h-4 text-(--brand-primary)" />
                 <span>+20 101 997 9315</span>
               </a>
             </div>
           </div>
 
-          <div className="pt-4 border-t border-[var(--border-primary)]/40 text-xs text-[var(--text-muted)]">
+          <div className="pt-4 border-t border-(--border-primary)/40 text-xs text-(--text-muted)">
             Open for remote and freelance work worldwide.
           </div>
         </div>

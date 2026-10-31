@@ -19,7 +19,7 @@ export function Navbar() {
   return (
     <header className="site-header">
       <Link href="/#home" className="brand flex items-center gap-2" onClick={closeMobileMenu}>
-        <span className="text-[var(--brand-primary)] font-mono font-black">&lt;/&gt;</span>
+        <span className="text-(--brand-primary) font-mono font-black">&lt;/&gt;</span>
         <span>Shaban Aly</span>
       </Link>
 
@@ -54,7 +54,7 @@ export function Navbar() {
             <Link
               href="/#contact"
               onClick={closeMobileMenu}
-              className="text-center font-bold text-white bg-[var(--brand-primary)] rounded-lg py-2"
+              className="text-center font-bold text-white bg-(--brand-primary) rounded-lg py-2"
             >
               Hire Me ↗
             </Link>
@@ -75,7 +75,7 @@ export function Navbar() {
       <div className="nav-actions">
         <Link
           href="/#contact"
-          className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[var(--brand-primary)] text-white text-xs font-bold hover:opacity-90 shadow-sm transition-all"
+          className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-(--brand-primary) text-white text-xs font-bold hover:opacity-90 shadow-sm transition-all"
         >
           <span>Hire Me</span>
           <ArrowUpRight className="w-3.5 h-3.5" />
