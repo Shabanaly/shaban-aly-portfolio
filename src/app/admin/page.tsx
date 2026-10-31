@@ -4,7 +4,7 @@ import { DashboardClient } from "@/components/admin/DashboardClient";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminDashboardPage() {
+export default async function AdminPage() {
   const [projects, profile] = await Promise.all([
     getAllProjectsAdmin(),
     getProfile(),
@@ -19,4 +19,3 @@ export default async function AdminDashboardPage() {
     </div>
   );
 }
-

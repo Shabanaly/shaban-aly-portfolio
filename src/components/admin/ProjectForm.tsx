@@ -55,11 +55,11 @@ export function ProjectForm({ project }: ProjectFormProps) {
     <div className="max-w-3xl mx-auto py-8 px-4">
       <div className="mb-6">
         <Link
-          href="/admin/dashboard"
+          href="/admin"
           className="inline-flex items-center gap-1.5 text-xs font-bold text-(--text-secondary) hover:text-(--text-primary) transition-colors mb-2"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to Dashboard</span>
+          <span>Back to Admin</span>
         </Link>
         <h1 className="text-2xl font-black">
           {isEditing ? `Edit: ${project?.title}` : "Add New Project"}
@@ -280,7 +280,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
 
         <div className="flex items-center justify-end gap-3 pt-4 border-t border-(--border-primary)">
           <Link
-            href="/admin/dashboard"
+            href="/admin"
             className="px-4 py-2 rounded-lg border border-(--border-primary) text-sm font-bold hover:bg-(--bg-surface) transition-colors"
           >
             Cancel

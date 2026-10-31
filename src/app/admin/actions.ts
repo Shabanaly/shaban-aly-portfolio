@@ -29,7 +29,7 @@ export async function signInAdmin(formData: FormData) {
     return { error: error.message };
   }
 
-  redirect("/admin/dashboard");
+  redirect("/admin");
 }
 
 export async function signOutAdmin() {
@@ -141,7 +141,8 @@ export async function createProjectAction(formData: FormData) {
   revalidatePath("/");
   revalidatePath("/projects");
   revalidatePath(`/projects/${slug}`);
-  redirect("/admin/dashboard");
+  revalidatePath("/admin");
+  redirect("/admin");
 }
 
 export async function updateProjectAction(id: string, formData: FormData) {
@@ -215,7 +216,8 @@ export async function updateProjectAction(id: string, formData: FormData) {
   revalidatePath("/");
   revalidatePath("/projects");
   revalidatePath(`/projects/${slug}`);
-  redirect("/admin/dashboard");
+  revalidatePath("/admin");
+  redirect("/admin");
 }
 
 export async function deleteProjectAction(id: string, slug: string) {
@@ -231,6 +233,7 @@ export async function deleteProjectAction(id: string, slug: string) {
   revalidatePath("/");
   revalidatePath("/projects");
   revalidatePath(`/projects/${slug}`);
+  revalidatePath("/admin");
   return { success: true };
 }
 
@@ -249,6 +252,7 @@ export async function togglePublishAction(id: string, currentState: boolean) {
 
   revalidatePath("/");
   revalidatePath("/projects");
+  revalidatePath("/admin");
   return { success: true };
 }
 
@@ -314,5 +318,6 @@ export async function updateProfileSettingsAction(formData: FormData) {
   }
 
   revalidatePath("/");
+  revalidatePath("/admin");
   return { success: true };
 }

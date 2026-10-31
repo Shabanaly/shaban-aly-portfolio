@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
-import { Menu, X, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -57,16 +57,6 @@ export function Navbar() {
               className="text-center font-bold text-white bg-(--brand-primary) rounded-lg py-2"
             >
               Hire Me ↗
-            </Link>
-          </li>
-          <li className="hidden sm:block">
-            <Link
-              href="/admin/dashboard"
-              onClick={closeMobileMenu}
-              className="text-xs opacity-60 hover:opacity-100 flex items-center gap-1 px-2"
-              title="Admin Portal"
-            >
-              <ShieldCheck className="w-3.5 h-3.5 inline" />
             </Link>
           </li>
         </ul>

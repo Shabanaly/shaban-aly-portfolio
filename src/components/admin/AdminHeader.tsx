@@ -9,7 +9,7 @@ export function AdminHeader() {
   return (
     <header className="border-b border-(--border-primary) bg-(--bg-header) backdrop-blur px-4 py-3 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <Link href="/admin" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
           <div className="w-8 h-8 rounded-lg bg-(--brand-primary) text-white flex items-center justify-center font-bold">
             <LayoutDashboard className="w-4 h-4" />
           </div>
@@ -21,7 +21,7 @@ export function AdminHeader() {
               Shaban Aly Control Center
             </span>
           </div>
-        </div>
+        </Link>
 
         <div className="flex items-center gap-3">
           <Link
