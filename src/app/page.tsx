@@ -1,12 +1,12 @@
 import { getProfile, getProjects } from "@/lib/data";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { ProjectsSection } from "@/components/ProjectsSection";
 import { AboutSection } from "@/components/AboutSection";
+import { SkillsSection } from "@/components/SkillsSection";
+import { ProjectsSection } from "@/components/ProjectsSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
 
-// Revalidate page data every hour or on-demand
 export const revalidate = 3600;
 
 export default async function HomePage() {
@@ -17,8 +17,9 @@ export default async function HomePage() {
       <Navbar />
       <main>
         <Hero profile={profile} />
-        <ProjectsSection projects={projects} />
         <AboutSection profile={profile} />
+        <SkillsSection profile={profile} />
+        <ProjectsSection projects={projects} />
         <ContactSection profile={profile} />
       </main>
       <Footer />

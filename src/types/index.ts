@@ -23,6 +23,26 @@ export interface SocialLink {
   icon: string;
 }
 
+export interface StatItem {
+  label: string;
+  value: string;
+  icon: "calendar" | "code" | "shield" | "trophy" | "smile" | string;
+}
+
+export interface SkillItem {
+  name: string;
+  percentage: number;
+  icon?: string;
+  category?: "frontend" | "styling" | "tools" | "backend" | string;
+}
+
+export interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  avatar?: string;
+}
+
 export interface ProfileSettings {
   id: string;
   full_name: string;
@@ -34,5 +54,8 @@ export interface ProfileSettings {
   profile_image_url: string;
   resume_url?: string | null;
   social_links: SocialLink[];
+  stats?: StatItem[];
+  skills?: SkillItem[];
+  testimonial?: Testimonial | null;
   updated_at: string;
 }

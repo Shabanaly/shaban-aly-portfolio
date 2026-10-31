@@ -1,10 +1,11 @@
-import { createClient } from "./supabase/server";
+import { getPublicClient } from "./supabase/public";
+import { createClient as createServerClient } from "./supabase/server";
 import { fallbackProjects, fallbackProfile } from "./supabase/fallbackData";
 import { Project, ProfileSettings } from "@/types";
 
 export async function getProfile(): Promise<ProfileSettings> {
   try {
-    const supabase = await createClient();
+    const supabase = getPublicClient();
     if (!supabase) return fallbackProfile;
 
     const { data, error } = await supabase
@@ -26,7 +27,7 @@ export async function getProfile(): Promise<ProfileSettings> {
 
 export async function getProjects(): Promise<Project[]> {
   try {
-    const supabase = await createClient();
+    const supabase = getPublicClient();
     if (!supabase) return fallbackProjects;
 
     const { data, error } = await supabase
@@ -48,7 +49,7 @@ export async function getProjects(): Promise<Project[]> {
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   try {
-    const supabase = await createClient();
+    const supabase = getPublicClient();
     if (!supabase) {
       return fallbackProjects.find((p) => p.slug === slug) || null;
     }
@@ -72,7 +73,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 
 export async function getAllProjectsAdmin(): Promise<Project[]> {
   try {
-    const supabase = await createClient();
+    const supabase = await createServerClient();
     if (!supabase) return fallbackProjects;
 
     const { data, error } = await supabase

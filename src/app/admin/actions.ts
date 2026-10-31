@@ -46,7 +46,7 @@ export async function uploadImageToStorage(file: File): Promise<string | null> {
 
   const fileExt = file.name.split(".").pop();
   const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
-  const filePath = `projects/${fileName}`;
+  const filePath = `uploads/${fileName}`;
 
   const { error } = await supabase.storage
     .from("portfolio")
@@ -92,7 +92,6 @@ export async function createProjectAction(formData: FormData) {
   );
   const is_published = formData.get("is_published") === "on";
 
-  // Parse arrays
   const technologiesRaw = (formData.get("technologies") as string) || "";
   const technologies = technologiesRaw
     .split(",")
@@ -107,7 +106,6 @@ export async function createProjectAction(formData: FormData) {
 
   let image_url = (formData.get("image_url") as string)?.trim();
 
-  // Check if a file was uploaded
   const imageFile = formData.get("image_file") as File;
   if (imageFile && imageFile.size > 0) {
     const uploadedUrl = await uploadImageToStorage(imageFile);
@@ -265,12 +263,21 @@ export async function updateProfileSettingsAction(formData: FormData) {
   const hero_description = (formData.get("hero_description") as string)?.trim();
   const about_text = (formData.get("about_text") as string)?.trim();
   let profile_image_url = (formData.get("profile_image_url") as string)?.trim();
+  let resume_url = (formData.get("resume_url") as string)?.trim();
 
   const profileImageFile = formData.get("profile_image_file") as File;
   if (profileImageFile && profileImageFile.size > 0) {
     const uploadedUrl = await uploadImageToStorage(profileImageFile);
     if (uploadedUrl) {
       profile_image_url = uploadedUrl;
+    }
+  }
+
+  const resumeFile = formData.get("resume_file") as File;
+  if (resumeFile && resumeFile.size > 0) {
+    const uploadedResumeUrl = await uploadImageToStorage(resumeFile);
+    if (uploadedResumeUrl) {
+      resume_url = uploadedResumeUrl;
     }
   }
 
@@ -284,9 +291,10 @@ export async function updateProfileSettingsAction(formData: FormData) {
       hero_description,
       about_text,
       profile_image_url,
+      resume_url,
       updated_at: new Date().toISOString(),
     })
-    .neq("id", "00000000-0000-0000-0000-000000000000"); // matches any existing row
+    .neq("id", "00000000-0000-0000-0000-000000000000");
 
   if (error) {
     return { error: error.message };

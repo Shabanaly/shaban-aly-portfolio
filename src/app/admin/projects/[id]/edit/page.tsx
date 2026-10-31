@@ -25,3 +25,4 @@ export default async function EditProjectPage({ params }: Props) {
     </div>
   );
 }
+

@@ -23,6 +23,7 @@ import {
   Clock,
   Sparkles,
   Loader2,
+  FileText,
 } from "lucide-react";
 
 interface Props {
@@ -55,7 +56,6 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
   ).length;
 
   async function handleTogglePublish(id: string, currentState: boolean) {
-    // Optimistic update
     setProjects((prev) =>
       prev.map((p) => (p.id === id ? { ...p, is_published: !currentState } : p))
     );
@@ -114,7 +114,7 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
         <div className="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex items-center justify-between">
           <div>
             <p className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">
-              Live & Published
+              Live &amp; Published
             </p>
             <p className="text-2xl font-black text-emerald-500 mt-1">
               {publishedCount}
@@ -163,7 +163,7 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
           }`}
         >
           <User className="w-4 h-4" />
-          <span>Profile & Bio Settings</span>
+          <span>Profile &amp; Bio Settings</span>
         </button>
       </div>
 
@@ -205,13 +205,16 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[var(--border-primary)]">
-                  {filteredProjects.map((p) => (
+                  {filteredProjects.map((p, idx) => (
                     <tr
                       key={p.id}
                       className="hover:bg-[var(--bg-surface)]/60 transition-colors"
                     >
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-3">
+                          <span className="font-mono text-xs font-bold text-[var(--text-muted)]">
+                            {String(idx + 1).padStart(2, "0")}
+                          </span>
                           <div className="w-12 h-9 rounded overflow-hidden relative border border-[var(--border-primary)] flex-shrink-0 bg-neutral-200 dark:bg-neutral-800">
                             <Image
                               src={p.image_url}
@@ -329,10 +332,10 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
         <div className="p-6 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] max-w-2xl">
           <h2 className="text-lg font-bold mb-1 flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-[var(--accent-secondary)]" />
-            <span>Edit Profile & Hero Content</span>
+            <span>Edit Profile, Resume &amp; Bio</span>
           </h2>
           <p className="text-xs text-[var(--text-secondary)] mb-6">
-            Changes made here update the homepage hero section and about text immediately.
+            Changes made here update the homepage hero section, resume link, and about text immediately.
           </p>
 
           {profileSuccess && (
@@ -406,6 +409,31 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                 defaultValue={initialProfile.about_text}
                 className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]"
               />
+            </div>
+
+            {/* Resume / CV file link */}
+            <div className="p-4 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-surface)] space-y-2">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">
+                <FileText className="w-4 h-4 text-[var(--brand-primary)]" />
+                <span>Resume / CV Document</span>
+              </div>
+              <div>
+                <label className="block text-xs text-[var(--text-secondary)] mb-1">
+                  Resume URL or File Path:
+                </label>
+                <input
+                  type="text"
+                  name="resume_url"
+                  defaultValue={initialProfile.resume_url || "/resume.pdf"}
+                  className="w-full px-3 py-2 rounded-lg border border-[var(--border-primary)] bg-[var(--bg-card)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] mb-2"
+                />
+                <input
+                  type="file"
+                  name="resume_file"
+                  accept=".pdf,.doc,.docx"
+                  className="text-xs text-[var(--text-secondary)] file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-bold file:bg-[var(--bg-card)] file:text-[var(--text-primary)] hover:file:bg-[var(--bg-card-hover)] cursor-pointer"
+                />
+              </div>
             </div>
 
             <div className="pt-2">

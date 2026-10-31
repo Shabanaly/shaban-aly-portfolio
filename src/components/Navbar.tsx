@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
-import { Menu, X, ShieldCheck } from "lucide-react";
+import { Menu, X, ArrowUpRight, ShieldCheck } from "lucide-react";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,8 +18,9 @@ export function Navbar() {
 
   return (
     <header className="site-header">
-      <Link href="/#home" className="brand" onClick={closeMobileMenu}>
-        Shaban Aly
+      <Link href="/#home" className="brand flex items-center gap-2" onClick={closeMobileMenu}>
+        <span className="text-[var(--brand-primary)] font-mono font-black">&lt;/&gt;</span>
+        <span>Shaban Aly</span>
       </Link>
 
       <nav className="site-nav" aria-label="Main navigation">
@@ -30,13 +31,18 @@ export function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/#projects" onClick={closeMobileMenu}>
-              Projects
+            <Link href="/#about" onClick={closeMobileMenu}>
+              About
             </Link>
           </li>
           <li>
-            <Link href="/#about" onClick={closeMobileMenu}>
-              About
+            <Link href="/#skills" onClick={closeMobileMenu}>
+              Skills
+            </Link>
+          </li>
+          <li>
+            <Link href="/#projects" onClick={closeMobileMenu}>
+              Projects
             </Link>
           </li>
           <li>
@@ -44,22 +50,39 @@ export function Navbar() {
               Contact
             </Link>
           </li>
-          <li>
+          <li className="sm:hidden">
+            <Link
+              href="/#contact"
+              onClick={closeMobileMenu}
+              className="text-center font-bold text-white bg-[var(--brand-primary)] rounded-lg py-2"
+            >
+              Hire Me ↗
+            </Link>
+          </li>
+          <li className="hidden sm:block">
             <Link
               href="/admin/dashboard"
               onClick={closeMobileMenu}
-              className="text-xs opacity-70 hover:opacity-100 flex items-center gap-1.5"
+              className="text-xs opacity-60 hover:opacity-100 flex items-center gap-1 px-2"
               title="Admin Portal"
             >
               <ShieldCheck className="w-3.5 h-3.5 inline" />
-              <span>Admin</span>
             </Link>
           </li>
         </ul>
       </nav>
 
       <div className="nav-actions">
+        <Link
+          href="/#contact"
+          className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[var(--brand-primary)] text-white text-xs font-bold hover:opacity-90 shadow-sm transition-all"
+        >
+          <span>Hire Me</span>
+          <ArrowUpRight className="w-3.5 h-3.5" />
+        </Link>
+
         <ThemeToggle />
+
         <button
           className={`icon-button menu-toggle ${mobileMenuOpen ? "active" : ""}`}
           type="button"

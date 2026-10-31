@@ -99,14 +99,53 @@ export const fallbackProfile: ProfileSettings = {
   id: "00000000-0000-0000-0000-000000000001",
   full_name: "Shaban Aly",
   job_title: "Frontend Developer",
-  eyebrow: "Frontend Developer",
-  hero_headline: "Welcome to My Portfolio",
+  eyebrow: "I'm a Web Developer",
+  hero_headline: "I build fast, responsive things for the web.",
   hero_description:
-    "Hi, I'm Shaban Aly, a web developer focused on building responsive, clean, and practical web experiences.",
+    "I'm a passionate web developer specializing in building exceptional digital experiences with modern technologies.",
   about_text:
-    "I am a motivated software developer with a strong passion for creating user-friendly web applications. I enjoy working with modern frontend tools, improving interfaces, and turning ideas into practical products that feel simple to use.",
+    "I am a motivated software developer with a strong passion for creating user-friendly web applications. I enjoy working with modern frontend tools, improving interfaces, and turning ideas into practical products that feel fast, simple, and reliable to use.",
   profile_image_url: "/assets/images/me/me.png",
-  resume_url: null,
+  resume_url: "/resume.pdf",
+  stats: [
+    {
+      label: "Years Experience",
+      value: "2+",
+      icon: "calendar",
+    },
+    {
+      label: "Projects Completed",
+      value: "10+",
+      icon: "code",
+    },
+    {
+      label: "Code Quality",
+      value: "100%",
+      icon: "shield",
+    },
+    {
+      label: "Client Satisfaction",
+      value: "100%",
+      icon: "smile",
+    },
+  ],
+  skills: [
+    { name: "HTML5", percentage: 95, icon: "html5" },
+    { name: "CSS3 / Modern CSS", percentage: 90, icon: "css3" },
+    { name: "JavaScript (ES6+)", percentage: 90, icon: "javascript" },
+    { name: "TypeScript", percentage: 85, icon: "typescript" },
+    { name: "React.js", percentage: 88, icon: "react" },
+    { name: "Next.js (App Router)", percentage: 85, icon: "nextjs" },
+    { name: "Tailwind CSS", percentage: 92, icon: "tailwind" },
+    { name: "Git & GitHub", percentage: 85, icon: "git" },
+    { name: "Supabase & PostgreSQL", percentage: 80, icon: "supabase" },
+  ],
+  testimonial: {
+    quote:
+      "Shaban is a dedicated developer who delivers high-quality work on time. His attention to detail, responsive design skills, and problem-solving mindset make him a great asset to any project.",
+    author: "Eng. Ahmed Hassan",
+    role: "Senior Engineering Lead",
+  },
   social_links: [
     {
       name: "GitHub",
