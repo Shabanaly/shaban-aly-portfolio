@@ -3,6 +3,8 @@ import { getAllProjectsAdmin } from "@/lib/data";
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { ProjectForm } from "@/components/admin/ProjectForm";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{
     id: string;

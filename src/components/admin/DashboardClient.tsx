@@ -221,6 +221,7 @@ export function DashboardClient({ initialProjects, initialProfile }: Props) {
                               src={p.image_url}
                               alt={p.title}
                               fill
+                              sizes="48px"
                               className="object-cover"
                             />
                           </div>

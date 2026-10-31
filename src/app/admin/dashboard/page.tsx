@@ -2,6 +2,8 @@ import { getAllProjectsAdmin, getProfile } from "@/lib/data";
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { DashboardClient } from "@/components/admin/DashboardClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminDashboardPage() {
   const [projects, profile] = await Promise.all([
     getAllProjectsAdmin(),

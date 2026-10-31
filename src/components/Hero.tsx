@@ -158,6 +158,7 @@ export function Hero({ profile }: HeroProps) {
                 src={profile.profile_image_url || "/assets/images/me/me.png"}
                 alt={profile.full_name}
                 fill
+                sizes="(max-width: 640px) 176px, 224px"
                 priority
                 className="rounded-full object-cover p-1"
               />
@@ -225,6 +226,7 @@ export function Hero({ profile }: HeroProps) {
               src={profile.profile_image_url || "/assets/images/me/me.png"}
               alt={profile.full_name}
               fill
+              sizes="288px"
               priority
               className="rounded-full object-cover p-1 group-hover:scale-105 transition-transform duration-500"
             />
