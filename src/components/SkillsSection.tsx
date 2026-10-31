@@ -21,8 +21,8 @@ export function SkillsSection({ profile }: SkillsSectionProps) {
   const skills = profile.skills && profile.skills.length > 0 ? profile.skills : defaultSkills;
 
   return (
-    <section className="skills section py-16" id="skills">
-      <div className="section-header text-center sm:text-left mb-12">
+    <section className="skills section py-12 sm:py-16" id="skills">
+      <div className="section-header text-center sm:text-left mb-8 sm:mb-12">
         <p className="eyebrow flex items-center justify-center sm:justify-start gap-1.5">
           <Cpu className="w-3.5 h-3.5" />
           <span>My Skills</span>
@@ -30,11 +30,11 @@ export function SkillsSection({ profile }: SkillsSectionProps) {
         <h2>Technologies I Master</h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6">
         {skills.map((skill) => (
           <div
             key={skill.name}
-            className="p-5 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] hover:border-[var(--brand-primary)]/40 hover:-translate-y-0.5 transition-all"
+            className="p-4 sm:p-5 rounded-xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] hover:border-[var(--brand-primary)]/40 hover:-translate-y-0.5 transition-all"
           >
             <div className="flex items-center justify-between mb-2">
               <span className="font-extrabold text-sm text-[var(--text-primary)]">

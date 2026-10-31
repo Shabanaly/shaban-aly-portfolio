@@ -10,3 +10,4 @@ export function getPublicClient() {
 
   return createSupabaseClient(supabaseUrl, supabaseAnonKey);
 }
+

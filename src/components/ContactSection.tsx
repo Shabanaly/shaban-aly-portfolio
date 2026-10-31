@@ -42,9 +42,15 @@ export function ContactSection({ profile }: ContactSectionProps) {
     role: "Senior Engineering Lead",
   };
 
+  // Only take social profiles (exclude email/phone since they are listed as contact rows below)
+  const socialIcons = profile.social_links.filter((l) => {
+    const n = l.name.toLowerCase();
+    return !n.includes("email") && !n.includes("mail") && !n.includes("phone") && !n.includes("tel");
+  });
+
   return (
-    <section className="contact section py-20" id="contact">
-      <div className="section-header text-center sm:text-left mb-12">
+    <section className="contact section py-12 sm:py-20" id="contact">
+      <div className="section-header text-center sm:text-left mb-8 sm:mb-12">
         <p className="eyebrow flex items-center justify-center sm:justify-start gap-1.5">
           <Sparkles className="w-3.5 h-3.5" />
           <span>Get In Touch</span>
@@ -54,7 +60,7 @@ export function ContactSection({ profile }: ContactSectionProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Column 1: Have a Project in Mind CTA */}
-        <div className="p-7 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex flex-col justify-between space-y-6">
+        <div className="p-6 sm:p-7 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex flex-col justify-between space-y-6">
           <div className="space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent-secondary)]">
               Let&apos;s Work Together
@@ -70,7 +76,7 @@ export function ContactSection({ profile }: ContactSectionProps) {
 
           <a
             href="mailto:sa676185@gmail.com"
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[var(--brand-primary)] text-white font-extrabold text-sm hover:opacity-90 shadow-md hover:-translate-y-0.5 transition-all"
+            className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[var(--brand-primary)] text-white font-extrabold text-sm hover:opacity-90 shadow-md hover:-translate-y-0.5 transition-all"
           >
             <span>Get In Touch</span>
             <ArrowUpRight className="w-4 h-4" />
@@ -78,7 +84,7 @@ export function ContactSection({ profile }: ContactSectionProps) {
         </div>
 
         {/* Column 2: Testimonial Quote Card */}
-        <div className="p-7 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex flex-col justify-between space-y-6">
+        <div className="p-6 sm:p-7 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex flex-col justify-between space-y-6">
           <div className="space-y-4">
             <div className="w-10 h-10 rounded-xl bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] flex items-center justify-center">
               <Quote className="w-5 h-5" />
@@ -104,15 +110,15 @@ export function ContactSection({ profile }: ContactSectionProps) {
         </div>
 
         {/* Column 3: Follow Me & Direct Contact Info */}
-        <div className="p-7 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex flex-col justify-between space-y-6">
+        <div className="p-6 sm:p-7 rounded-2xl border border-[var(--border-primary)] bg-[var(--bg-card)] shadow-[var(--shadow-sm)] flex flex-col justify-between space-y-6">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-[var(--accent-secondary)] block mb-3">
               Follow &amp; Contact Me
             </span>
 
-            {/* Social Icons row */}
-            <div className="flex flex-wrap items-center gap-2 mb-6">
-              {profile.social_links.map((link: SocialLink) => (
+            {/* Social Icons row (4 icons in a neat row) */}
+            <div className="flex items-center gap-2.5 mb-6">
+              {socialIcons.map((link: SocialLink) => (
                 <a
                   key={link.name}
                   href={link.url}
