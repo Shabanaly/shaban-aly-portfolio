@@ -1,9 +1,10 @@
 -- ==============================================================================
--- Portfolio Database Schema & Seed Data for Shaban Aly
--- Supabase PostgreSQL
+-- Idempotent Migration & Schema Script for Supabase PostgreSQL
+-- ملف ترقية وتهيئة قاعدة البيانات (آمن تماماً للتشغيل على قاعدة البيانات الحالية)
+-- يمكن تشغيله سواء كانت الجداول موجودة مسبقاً أو جديدة بدون أي أخطاء
 -- ==============================================================================
 
--- 1. Create Projects Table
+-- 1. التأكد من وجود جدول المشاريع (Projects Table)
 create table if not exists public.projects (
   id uuid primary key default gen_random_uuid(),
   title text not null,
@@ -23,7 +24,13 @@ create table if not exists public.projects (
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
--- 2. Create Profile / Site Settings Table
+-- إضافة أي أعمدة جديدة لجدول المشاريع إن لم تكن موجودة
+alter table public.projects add column if not exists github_url text;
+alter table public.projects add column if not exists short_description text;
+alter table public.projects add column if not exists order_index integer default 0;
+alter table public.projects add column if not exists is_published boolean default true;
+
+-- 2. التأكد من وجود جدول إعدادات الملف الشخصي (Profile Settings Table)
 create table if not exists public.profile_settings (
   id uuid primary key default gen_random_uuid(),
   full_name text not null default 'Shaban Aly',
@@ -34,13 +41,49 @@ create table if not exists public.profile_settings (
   about_text text default 'I am a motivated software developer with a strong passion for creating user-friendly web applications. I enjoy working with modern frontend tools, improving interfaces, and turning ideas into practical products that feel fast, simple, and reliable to use.',
   profile_image_url text default '/assets/images/me/me.png',
   resume_url text default '/resume.pdf',
-  stats jsonb default '[
+  social_links jsonb default '[]'::jsonb,
+  updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- ترقية جدول الملف الشخصي بإضافة الحقول الجديدة إن لم تكن موجودة (Stats, Skills, Testimonial, Resume)
+alter table public.profile_settings add column if not exists resume_url text default '/resume.pdf';
+alter table public.profile_settings add column if not exists eyebrow text default 'I''m a Web Developer';
+
+alter table public.profile_settings add column if not exists stats jsonb default '[
+  {"label": "Years Experience", "value": "2+", "icon": "calendar"},
+  {"label": "Projects Completed", "value": "10+", "icon": "code"},
+  {"label": "Code Quality", "value": "100%", "icon": "shield"},
+  {"label": "Client Satisfaction", "value": "100%", "icon": "smile"}
+]'::jsonb;
+
+alter table public.profile_settings add column if not exists skills jsonb default '[
+  {"name": "HTML5", "percentage": 95, "icon": "html5"},
+  {"name": "CSS3 / Modern CSS", "percentage": 90, "icon": "css3"},
+  {"name": "JavaScript (ES6+)", "percentage": 90, "icon": "javascript"},
+  {"name": "TypeScript", "percentage": 85, "icon": "typescript"},
+  {"name": "React.js", "percentage": 88, "icon": "react"},
+  {"name": "Next.js (App Router)", "percentage": 85, "icon": "nextjs"},
+  {"name": "Tailwind CSS", "percentage": 92, "icon": "tailwind"},
+  {"name": "Git & GitHub", "percentage": 85, "icon": "git"},
+  {"name": "Supabase & PostgreSQL", "percentage": 80, "icon": "supabase"}
+]'::jsonb;
+
+alter table public.profile_settings add column if not exists testimonial jsonb default '{
+  "quote": "Shaban is a dedicated frontend developer who delivers high-quality work on time. His attention to detail, responsive design skills, and clean architecture make him a great asset to any team.",
+  "author": "Eng. Ahmed Hassan",
+  "role": "Senior Engineering Lead"
+}'::jsonb;
+
+-- تحديث الحقول الفارغة في الصف الحالي إذا تم إنشاؤه مسبقاً قبل الترقية
+update public.profile_settings
+set
+  stats = coalesce(stats, '[
     {"label": "Years Experience", "value": "2+", "icon": "calendar"},
     {"label": "Projects Completed", "value": "10+", "icon": "code"},
     {"label": "Code Quality", "value": "100%", "icon": "shield"},
     {"label": "Client Satisfaction", "value": "100%", "icon": "smile"}
-  ]'::jsonb,
-  skills jsonb default '[
+  ]'::jsonb),
+  skills = coalesce(skills, '[
     {"name": "HTML5", "percentage": 95, "icon": "html5"},
     {"name": "CSS3 / Modern CSS", "percentage": 90, "icon": "css3"},
     {"name": "JavaScript (ES6+)", "percentage": 90, "icon": "javascript"},
@@ -50,28 +93,26 @@ create table if not exists public.profile_settings (
     {"name": "Tailwind CSS", "percentage": 92, "icon": "tailwind"},
     {"name": "Git & GitHub", "percentage": 85, "icon": "git"},
     {"name": "Supabase & PostgreSQL", "percentage": 80, "icon": "supabase"}
-  ]'::jsonb,
-  testimonial jsonb default '{
-    "quote": "Shaban is a dedicated developer who delivers high-quality work on time. His attention to detail, responsive design skills, and problem-solving mindset make him a great asset to any project.",
+  ]'::jsonb),
+  testimonial = coalesce(testimonial, '{
+    "quote": "Shaban is a dedicated frontend developer who delivers high-quality work on time. His attention to detail, responsive design skills, and clean architecture make him a great asset to any team.",
     "author": "Eng. Ahmed Hassan",
     "role": "Senior Engineering Lead"
-  }'::jsonb,
-  social_links jsonb default '[
-    {"name": "GitHub", "url": "https://github.com/Shabanaly", "icon": "github"},
-    {"name": "LinkedIn", "url": "https://www.linkedin.com/in/shaban-ali-03982a329/", "icon": "linkedin"},
-    {"name": "Facebook", "url": "https://www.facebook.com/shabanaly2024/", "icon": "facebook"},
-    {"name": "WhatsApp", "url": "https://wa.me/201019979315?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%B4%D8%B9%D8%A8%D8%A7%D9%86%D8%8C%20%D9%84%D9%82%D8%AF%20%D9%88%D8%AC%D8%AF%D8%AA%20%D9%85%D9%84%D9%81%20%D8%A3%D8%B9%D9%85%D8%A7%D9%84%D9%83%20%D9%88%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83!", "icon": "message-circle"},
-    {"name": "Email", "url": "mailto:sa676185@gmail.com", "icon": "mail"},
-    {"name": "Phone", "url": "tel:+201019979315", "icon": "phone"}
-  ]'::jsonb,
-  updated_at timestamp with time zone default timezone('utc'::text, now()) not null
-);
+  }'::jsonb),
+  resume_url = coalesce(resume_url, '/resume.pdf')
+where true;
 
--- 3. Row Level Security (RLS) Setup
+-- 3. تأمين الجداول وسياسات الأمان (Row Level Security - RLS)
 alter table public.projects enable row level security;
 alter table public.profile_settings enable row level security;
 
--- Projects Policies:
+-- حذف السياسات إن كانت موجودة مسبقاً لتجنب خطأ "policy already exists"
+drop policy if exists "Allow public read access to published projects" on public.projects;
+drop policy if exists "Allow authenticated admins full access to projects" on public.projects;
+drop policy if exists "Allow public read access to profile settings" on public.profile_settings;
+drop policy if exists "Allow authenticated admins to update profile settings" on public.profile_settings;
+
+-- إعادة إنشاء السياسات
 create policy "Allow public read access to published projects"
   on public.projects
   for select
@@ -84,7 +125,6 @@ create policy "Allow authenticated admins full access to projects"
   using (true)
   with check (true);
 
--- Profile Settings Policies:
 create policy "Allow public read access to profile settings"
   on public.profile_settings
   for select
@@ -97,11 +137,18 @@ create policy "Allow authenticated admins to update profile settings"
   using (true)
   with check (true);
 
--- 4. Storage Bucket Setup
+-- 4. إعداد مستودع التخزين لرفع الصور (Storage Bucket)
 insert into storage.buckets (id, name, public)
 values ('portfolio', 'portfolio', true)
 on conflict (id) do nothing;
 
+-- حذف سياسات التخزين السابقة إن وجدت
+drop policy if exists "Allow public read from portfolio bucket" on storage.objects;
+drop policy if exists "Allow authenticated admin upload to portfolio bucket" on storage.objects;
+drop policy if exists "Allow authenticated admin update in portfolio bucket" on storage.objects;
+drop policy if exists "Allow authenticated admin delete from portfolio bucket" on storage.objects;
+
+-- إعادة إنشاء سياسات التخزين
 create policy "Allow public read from portfolio bucket"
   on storage.objects for select
   using (bucket_id = 'portfolio');
@@ -121,7 +168,7 @@ create policy "Allow authenticated admin delete from portfolio bucket"
   to authenticated
   using (bucket_id = 'portfolio');
 
--- 5. Seed Initial Data
+-- 5. إدخال وتحديث البيانات الافتراضية
 insert into public.profile_settings (id, full_name, job_title)
 values ('00000000-0000-0000-0000-000000000001', 'Shaban Aly', 'Frontend Developer')
 on conflict (id) do nothing;
