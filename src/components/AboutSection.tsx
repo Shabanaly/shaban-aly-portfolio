@@ -76,17 +76,17 @@ export function AboutSection({ profile }: AboutSectionProps) {
           {stats.map((stat, idx) => (
             <div
               key={idx}
-              className="p-4 sm:p-6 rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) hover:border-(--brand-primary)/40 hover:-translate-y-1 transition-all flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-4"
+              className="min-w-0 p-3.5 sm:p-6 rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-(--shadow-sm) hover:border-(--brand-primary)/40 hover:-translate-y-1 transition-all flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-2.5 sm:gap-4 overflow-hidden"
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-(--bg-surface) border border-(--border-primary) flex items-center justify-center flex-shrink-0">
                 {getStatIcon(stat.icon)}
               </div>
 
-              <div>
-                <p className="text-xl sm:text-3xl font-black text-(--text-primary) font-mono">
+              <div className="min-w-0">
+                <p className="text-xl sm:text-3xl font-black text-(--text-primary) font-mono truncate">
                   {stat.value}
                 </p>
-                <p className="text-[11px] sm:text-sm text-(--text-secondary) font-medium mt-1 leading-snug">
+                <p className="text-[11px] sm:text-sm text-(--text-secondary) font-medium mt-1 leading-snug break-words">
                   {stat.label}
                 </p>
               </div>

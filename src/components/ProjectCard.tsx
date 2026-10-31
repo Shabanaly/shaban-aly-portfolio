@@ -40,13 +40,13 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       </div>
 
       {/* Content Area */}
-      <div className="flex flex-1 flex-col p-5 pt-3 gap-3">
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-xs uppercase font-extrabold tracking-wider text-(--accent-secondary)">
+      <div className="flex flex-1 flex-col p-5 pt-3 gap-3 min-w-0 overflow-hidden">
+        <div className="flex items-center justify-between gap-2 min-w-0">
+          <span className="text-xs uppercase font-extrabold tracking-wider text-(--accent-secondary) truncate">
             {project.category}
           </span>
           <span
-            className={`text-[10px] px-2.5 py-0.5 rounded-full font-bold ${
+            className={`text-[10px] px-2.5 py-0.5 rounded-full font-bold flex-shrink-0 ${
               project.status.toLowerCase() === "live"
                 ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
                 : "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
@@ -56,7 +56,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           </span>
         </div>
 
-        <h3 className="text-xl font-extrabold text-(--text-primary) group-hover:text-(--brand-primary) transition-colors">
+        <h3 className="text-xl font-extrabold text-(--text-primary) group-hover:text-(--brand-primary) transition-colors truncate">
           {project.title}
         </h3>
 

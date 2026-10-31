@@ -123,9 +123,9 @@ export default async function ProjectDetailsPage({ params }: Props) {
         </header>
 
         {/* Project Showcase Mockup Frame (Contain-Mode to ensure zero image cut off) */}
-        <div className="relative mb-6 sm:mb-10">
+        <div className="relative mb-6 sm:mb-10 overflow-hidden rounded-xl sm:rounded-2xl">
           {/* Subtle Ambient Glow */}
-          <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 rounded-2xl sm:rounded-3xl blur-xl -z-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 rounded-xl sm:rounded-2xl blur-lg -z-10 pointer-events-none" />
 
           {/* Browser Container */}
           <div className="rounded-xl sm:rounded-2xl border border-(--border-primary) bg-(--bg-card) shadow-lg dark:shadow-2xl overflow-hidden">
@@ -202,7 +202,7 @@ export default async function ProjectDetailsPage({ params }: Props) {
 
         {/* Quick Stats Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-(--bg-card) border border-(--border-primary) mb-8 sm:mb-12 shadow-xs">
-          <div>
+          <div className="min-w-0">
             <span className="text-[10px] sm:text-xs uppercase tracking-wider font-semibold text-(--text-muted) block mb-0.5">
               Category
             </span>
@@ -210,16 +210,16 @@ export default async function ProjectDetailsPage({ params }: Props) {
               {project.category}
             </span>
           </div>
-          <div>
+          <div className="min-w-0">
             <span className="text-[10px] sm:text-xs uppercase tracking-wider font-semibold text-(--text-muted) block mb-0.5">
               Status
             </span>
-            <span className="text-xs sm:text-sm font-bold text-emerald-500 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
-              {project.status || "Live"}
+            <span className="text-xs sm:text-sm font-bold text-emerald-500 flex items-center gap-1.5 truncate">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block flex-shrink-0" />
+              <span className="truncate">{project.status || "Live"}</span>
             </span>
           </div>
-          <div>
+          <div className="min-w-0">
             <span className="text-[10px] sm:text-xs uppercase tracking-wider font-semibold text-(--text-muted) block mb-0.5">
               Role
             </span>
@@ -227,7 +227,7 @@ export default async function ProjectDetailsPage({ params }: Props) {
               Frontend Development
             </span>
           </div>
-          <div>
+          <div className="min-w-0">
             <span className="text-[10px] sm:text-xs uppercase tracking-wider font-semibold text-(--text-muted) block mb-0.5">
               Responsive
             </span>
@@ -345,7 +345,7 @@ export default async function ProjectDetailsPage({ params }: Props) {
             {prevProject ? (
               <Link
                 href={`/projects/${prevProject.slug}`}
-                className="flex items-center gap-2 p-2.5 sm:p-4 rounded-xl border border-(--border-primary) bg-(--bg-card) hover:border-(--brand-primary) transition-all group min-w-0"
+                className="flex items-center gap-2 p-2.5 sm:p-4 rounded-xl border border-(--border-primary) bg-(--bg-card) hover:border-(--brand-primary) transition-all group min-w-0 overflow-hidden w-full"
               >
                 <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-(--brand-primary) flex-shrink-0 transition-transform group-hover:-translate-x-1" />
                 <div className="min-w-0 overflow-hidden">
@@ -364,7 +364,7 @@ export default async function ProjectDetailsPage({ params }: Props) {
             {nextProject ? (
               <Link
                 href={`/projects/${nextProject.slug}`}
-                className="flex items-center justify-end text-right gap-2 p-2.5 sm:p-4 rounded-xl border border-(--border-primary) bg-(--bg-card) hover:border-(--brand-primary) transition-all group min-w-0"
+                className="flex items-center justify-end text-right gap-2 p-2.5 sm:p-4 rounded-xl border border-(--border-primary) bg-(--bg-card) hover:border-(--brand-primary) transition-all group min-w-0 overflow-hidden w-full ml-auto"
               >
                 <div className="min-w-0 overflow-hidden">
                   <span className="text-[10px] sm:text-xs text-(--text-muted) block uppercase tracking-wider font-semibold">

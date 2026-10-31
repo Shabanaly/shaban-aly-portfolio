@@ -15,7 +15,7 @@ export default async function HomePage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="w-full max-w-full overflow-x-hidden">
         <Hero profile={profile} />
         <AboutSection profile={profile} />
         <SkillsSection profile={profile} />
