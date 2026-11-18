@@ -64,4 +64,4 @@ Shaban Aly
 
 - [GitHub](https://github.com/Shabanaly)
 - [LinkedIn](https://www.linkedin.com/in/shaban-ali-03982a329/)
-- [Email](mailto:sa676185@gmail.com)
+- [Email](mailto:info@shabanaly.site)
